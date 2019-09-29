@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="43bee492-fc4e-4bb0-81e0-fada83415648" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1RNxlW9I0WqFQBEyEjt4l6MO0nJ" />
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path" value="D:\Proyectos\AndroidProjects\PodCastAccess\libs" />
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="true" />
+    <property name="create.test.in.the.same.root" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.alvaromoran" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.All in PodCastAccess">
+    <configuration name="All in PodCastAccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PodCastAccess" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CastDroidStoreDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PodCastAccess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.alvaromoran.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.alvaromoran" />
+      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CastDroidStoreDAOTest.setResultsLimitZero" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PodCastAccess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.alvaromoran.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.alvaromoran" />
+      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
+      <option name="METHOD_NAME" value="setResultsLimitZero" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CastDroidStoreDAOTest.updateArtistSearchParameterValidWithTerm" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PodCastAccess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.alvaromoran.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.alvaromoran" />
+      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
+      <option name="METHOD_NAME" value="updateArtistSearchParameterValidWithTerm" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CastDroidStoreDAOTest.updateTermSearchParameterNull" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PodCastAccess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.alvaromoran.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.alvaromoran" />
+      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
+      <option name="METHOD_NAME" value="updateTermSearchParameterNull" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.All in PodCastAccess" />
+        <item itemvalue="JUnit.CastDroidStoreDAOTest" />
+        <item itemvalue="JUnit.CastDroidStoreDAOTest.setResultsLimitZero" />
+        <item itemvalue="JUnit.CastDroidStoreDAOTest.updateArtistSearchParameterValidWithTerm" />
+        <item itemvalue="JUnit.CastDroidStoreDAOTest.updateTermSearchParameterNull" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="43bee492-fc4e-4bb0-81e0-fada83415648" name="Default Changelist" comment="" />
+      <created>1569521505514</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1569521505514</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/PodCastAccess$All_in_PodCastAccess.ic" NAME="All in PodCastAccess Coverage Results" MODIFIED="1569795941867" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>
