@@ -1,25 +1,30 @@
 package com.alvaromoran;
 
 import com.alvaromoran.data.EnrichedChannel;
-import com.alvaromoran.data.PodCastChannel;
+import com.alvaromoran.data.SingleEpisode;
+import com.alvaromoran.data.PodCastChannelDTO;
 
 import java.util.List;
 
 public interface PodCastsDAO {
 
-    List<PodCastChannel> updateTermSearchParameter(String term);
+    List<PodCastChannelDTO> updateTermSearchParameter(String term);
 
-    List<PodCastChannel>  updateArtistSearchParameter(String artist);
+    List<PodCastChannelDTO>  updateArtistSearchParameter(String artist);
 
-    List<PodCastChannel>  updateAuthorSearchParameter(String author);
+    List<PodCastChannelDTO>  updateAuthorSearchParameter(String author);
 
     void setResultsLimit(int number);
 
     void setAutoQueryChannelsOption(boolean autoQuery);
 
-    List<PodCastChannel> executeQueryOnDemand();
+    List<PodCastChannelDTO> executeQueryOnDemand();
 
-    EnrichedChannel getEnrichedChannelInformation(PodCastChannel selectedChannel);
+    EnrichedChannel getEnrichedChannelInformation(PodCastChannelDTO selectedChannel);
+
+    List<SingleEpisode> getListOfEpisodesFromChannel(PodCastChannelDTO selectedChannel);
+
+    List<SingleEpisode> getListOfEpisodesFromUrl(String url);
 
 
 

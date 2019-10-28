@@ -1,5 +1,12 @@
 package com.alvaromoran.constants;
 
+/**
+ * Genre-related parameters allowed while performing the GET request
+ * over the ITunes store
+ *
+ * @author AlvaroMoranDEV
+ * @version 0.1
+ */
 public enum ITunesGenreKeys {
 
     /** Set of different genres to categorize and episode / channel on the ITunes Store */

@@ -41,5 +41,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="simple-xml-2.7" level="project" />
   </component>
 </module>

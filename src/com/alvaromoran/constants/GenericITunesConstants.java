@@ -1,5 +1,12 @@
 package com.alvaromoran.constants;
 
+/**
+ * Constants used to create the API REST GET request over the ITunes store
+ *
+ * @author AlvaroMoranDEV
+ * @version 0.1
+ */
+
 public class GenericITunesConstants {
 
     /** Separator between main URL and search parameters */

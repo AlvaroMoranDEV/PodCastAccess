@@ -1,5 +1,12 @@
 package com.alvaromoran.constants;
 
+/**
+ * PodCast specific parameters allowed while performing the GET request
+ * over the ITunes store
+ *
+ * @author AlvaroMoranDEV
+ * @version 0.1
+ */
 public enum ITunesSpecificPodCastKeys {
 
     /** Specific keys to search PodCasts over the ITunes Store DB */

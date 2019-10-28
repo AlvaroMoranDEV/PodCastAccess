@@ -10,5 +10,5 @@ import java.util.Collection;
 public class JsonRoot {
 
     public int resultCount;
-    public Collection<PodCastChannel> results;
+    public Collection<PodCastChannelDTO> results;
 }

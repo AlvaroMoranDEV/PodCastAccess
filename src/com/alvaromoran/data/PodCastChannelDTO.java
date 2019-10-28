@@ -5,8 +5,11 @@ import java.util.Date;
 
 /**
  * Set of all the data provided by the ITunes store in its JSON answers
+ *
+ * @author AlvaroMoranDEV
+ * @version 0.1
  */
-public class PodCastChannel {
+public class PodCastChannelDTO {
 
     public String wrapperType;
     public String kind;

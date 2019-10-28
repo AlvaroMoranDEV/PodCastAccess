@@ -11,8 +11,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -30,13 +30,18 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="true" />
     <property name="create.test.in.the.same.root" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
       <recent name="com.alvaromoran" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.alvaromoran.data" />
+      <recent name="com.alvaromoran.data.itunes" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -54,7 +59,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.All in PodCastAccess">
+  <component name="RunManager" selected="JUnit.CastDroidStoreDAOTest.getListOfEpisodesFromUrl">
     <configuration name="All in PodCastAccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PodCastAccess" />
       <option name="PACKAGE_NAME" value="" />
@@ -74,6 +79,22 @@
       <option name="PACKAGE_NAME" value="com.alvaromoran" />
       <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CastDroidStoreDAOTest.getListOfEpisodesFromUrl" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PodCastAccess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.alvaromoran.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.alvaromoran" />
+      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
+      <option name="METHOD_NAME" value="getListOfEpisodesFromUrl" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -110,29 +131,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CastDroidStoreDAOTest.updateTermSearchParameterNull" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PodCastAccess" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.alvaromoran.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.alvaromoran" />
-      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
-      <option name="METHOD_NAME" value="updateTermSearchParameterNull" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CastDroidStoreDAOTest.getListOfEpisodesFromUrl" />
         <item itemvalue="JUnit.All in PodCastAccess" />
         <item itemvalue="JUnit.CastDroidStoreDAOTest" />
         <item itemvalue="JUnit.CastDroidStoreDAOTest.setResultsLimitZero" />
         <item itemvalue="JUnit.CastDroidStoreDAOTest.updateArtistSearchParameterValidWithTerm" />
-        <item itemvalue="JUnit.CastDroidStoreDAOTest.updateTermSearchParameterNull" />
       </list>
     </recent_temporary>
   </component>
@@ -158,6 +163,17 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/alvaromoran/CastDroidStoreDAO.java</url>
+          <line>182</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PodCastAccess$All_in_PodCastAccess.ic" NAME="All in PodCastAccess Coverage Results" MODIFIED="1569795941867" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
