@@ -8,6 +8,15 @@ package com.alvaromoran.constants;
  */
 public class XmlFeedConstants {
 
+    /** Channel element */
+    public static final String XML_CHANNEL = "channel";
+
+
+    public static final String XML_CHANNEL_LINK = "link";
+    public static final String XML_CHANNEL_COPYRIGHT = "copyright";
+    public static final String XML_CHANNEL_SUMMARY = "summary";
+    public static final String XML_CHANNEL_AUTHOR = "author";
+
     /** Item element */
     public static final String XML_ITEM_TAG = "item";
 

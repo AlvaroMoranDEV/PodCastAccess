@@ -59,7 +59,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CastDroidStoreDAOTest.getListOfEpisodesFromUrl">
+  <component name="RunManager" selected="JUnit.CastDroidStoreDAOTest">
     <configuration name="All in PodCastAccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PodCastAccess" />
       <option name="PACKAGE_NAME" value="" />
@@ -83,6 +83,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CastDroidStoreDAOTest.executeQueryOnDemandNotValidQueryAfterValidQuery" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PodCastAccess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.alvaromoran.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.alvaromoran" />
+      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
+      <option name="METHOD_NAME" value="executeQueryOnDemandNotValidQueryAfterValidQuery" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CastDroidStoreDAOTest.getEnrichedChannelInformationGoodChannel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PodCastAccess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.alvaromoran.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.alvaromoran" />
+      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
+      <option name="METHOD_NAME" value="getEnrichedChannelInformationGoodChannel" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CastDroidStoreDAOTest.getListOfEpisodesFromUrl" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PodCastAccess" />
       <extension name="coverage">
@@ -99,45 +131,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CastDroidStoreDAOTest.setResultsLimitZero" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PodCastAccess" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.alvaromoran.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.alvaromoran" />
-      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
-      <option name="METHOD_NAME" value="setResultsLimitZero" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CastDroidStoreDAOTest.updateArtistSearchParameterValidWithTerm" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PodCastAccess" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.alvaromoran.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.alvaromoran" />
-      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
-      <option name="METHOD_NAME" value="updateArtistSearchParameterValidWithTerm" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CastDroidStoreDAOTest" />
+        <item itemvalue="JUnit.CastDroidStoreDAOTest.getEnrichedChannelInformationGoodChannel" />
+        <item itemvalue="JUnit.CastDroidStoreDAOTest.executeQueryOnDemandNotValidQueryAfterValidQuery" />
         <item itemvalue="JUnit.CastDroidStoreDAOTest.getListOfEpisodesFromUrl" />
         <item itemvalue="JUnit.All in PodCastAccess" />
-        <item itemvalue="JUnit.CastDroidStoreDAOTest" />
-        <item itemvalue="JUnit.CastDroidStoreDAOTest.setResultsLimitZero" />
-        <item itemvalue="JUnit.CastDroidStoreDAOTest.updateArtistSearchParameterValidWithTerm" />
       </list>
     </recent_temporary>
   </component>
@@ -168,9 +168,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/alvaromoran/CastDroidStoreDAO.java</url>
-          <line>182</line>
-          <option name="timeStamp" value="3" />
+          <url>file://$PROJECT_DIR$/tests/com/alvaromoran/CastDroidStoreDAOTest.java</url>
+          <line>184</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

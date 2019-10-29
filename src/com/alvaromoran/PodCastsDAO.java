@@ -1,31 +1,98 @@
 package com.alvaromoran;
 
-import com.alvaromoran.data.EnrichedChannel;
+import com.alvaromoran.data.ChannelInformation;
 import com.alvaromoran.data.SingleEpisode;
-import com.alvaromoran.data.PodCastChannelDTO;
 
 import java.util.List;
 
+/**
+ * Interface used to access the DAO functionality, which allows to:
+ * - Search channels information in the ITunes store
+ * - Search particular channel information directly from the content provider
+ * - Get the list of episodes from a particular channel
+ *
+ * @author AlvaroMoranDEV
+ * @version 0.1
+ */
 public interface PodCastsDAO {
 
-    List<PodCastChannelDTO> updateTermSearchParameter(String term);
+    /**
+     * Updates the main term parameter used to search in the ITunes store
+     * @param term term value
+     * @return channels returned as result of the query if the auto query option is enabled
+     */
+    List<ChannelInformation> updateTermSearchParameter(String term);
 
-    List<PodCastChannelDTO>  updateArtistSearchParameter(String artist);
+    /**
+     * Updates the artist term parameter used to search in the ITunes store
+     * @param artist artist value
+     * @return channels returned as result of the query if the auto query option is enabled
+     */
+    List<ChannelInformation>  updateArtistSearchParameter(String artist);
 
-    List<PodCastChannelDTO>  updateAuthorSearchParameter(String author);
+    /**
+     * Updates the author term parameter used to search in the ITunes store
+     * @param author author value
+     * @return channels returned as result of the query if the auto query option is enabled
+     */
+    List<ChannelInformation>  updateAuthorSearchParameter(String author);
 
-    void setResultsLimit(int number);
+    /**
+     * Sets the limit of channels returned per query. Default value is 50, minimum value is 1 and max value is 200
+     * @param number max number of channels returned per query
+     */
+    void setChannelResultsLimit(int number);
 
+    /**
+     * Sets if the search of channels will be based on paid and free channels (<code>true</code>) or only over free
+     * channels (<code>false</code>). By default the value of this flag is false.
+     * @param searchPaidChannels new value for the flag
+     */
+    void setSearchPaidChannels(boolean searchPaidChannels);
+
+    /**
+     * Enables / disables the auto query option. If enabled, when the search parameters are updated, the query is
+     * automatically executed. If disabled, the query is only executed when calling the executeQueryOnDemand method
+     * @param autoQuery <code>true</code> enables the auto query functionality
+     *                  <code>false</code> disables the auto query functionality
+     */
     void setAutoQueryChannelsOption(boolean autoQuery);
 
-    List<PodCastChannelDTO> executeQueryOnDemand();
+    /**
+     * Executes the query instantly based on the stored parameters, if any
+     * @return list of channels returned as result of the query
+     */
+    List<ChannelInformation> executeQueryOnDemand();
 
-    EnrichedChannel getEnrichedChannelInformation(PodCastChannelDTO selectedChannel);
+    /**
+     * Gets enriched channel information from a particular channel passed as an argument. This method will add
+     * information such as copyright, detailed descriptions, list of episodes... for the ChannelInformation object
+     * @param selectedChannel channel to be updated with detailed information
+     * @param getEpisodes <code>true</code> the channel is filled with episodes information - It may be a time consuming process
+     *                    <code>false</code> then channel is not filled with episodes information
+     */
+    void getEnrichedChannelInformation(ChannelInformation selectedChannel, boolean getEpisodes);
 
-    List<SingleEpisode> getListOfEpisodesFromChannel(PodCastChannelDTO selectedChannel);
+    /**
+     * Gets enriched channel information from a particular channel passed as an argument. This method will add
+     * information such as copyright, detailed descriptions, list of episodes... for the ChannelInformation object.
+     * In this case, the channel will be filled with episodes information if possible
+     * @param selectedChannel channel to be updated with detailed information
+     */
+    void getEnrichedChannelInformation(ChannelInformation selectedChannel);
 
+    /**
+     * Gets the list of episodes related to a particular channel. No additional information is added to the channel object
+     * @param selectedChannel channel to get the episodes from
+     * @return list of episodes
+     */
+    List<SingleEpisode> getListOfEpisodesFromChannel(ChannelInformation selectedChannel);
+
+    /**
+     * Gets the list of episodes based on a particular URL, if possible
+     * @param url URL to be used to get the episodes information from
+     * @return list of episodes
+     */
     List<SingleEpisode> getListOfEpisodesFromUrl(String url);
-
-
 
 }

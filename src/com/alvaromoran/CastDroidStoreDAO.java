@@ -3,23 +3,19 @@ package com.alvaromoran;
 import com.alvaromoran.constants.GenericITunesConstants;
 import com.alvaromoran.constants.ITunesSearchKeys;
 import com.alvaromoran.constants.ITunesSpecificPodCastKeys;
-import com.alvaromoran.constants.XmlFeedConstants;
-import com.alvaromoran.data.EnrichedChannel;
+import com.alvaromoran.data.ChannelInformation;
 import com.alvaromoran.data.SingleEpisode;
 import com.alvaromoran.data.JsonRoot;
 import com.alvaromoran.data.PodCastChannelDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +27,7 @@ import java.util.logging.Logger;
  * @author AlvaroMoranDEV
  * @version 0.1
  */
-public class CastDroidStoreDAO implements PodCastsDAO {
+class CastDroidStoreDAO implements PodCastsDAO {
 
     /** Logger of the class */
     private static final Logger LOGGER = Logger.getLogger(CastDroidStoreDAO.class.getName());
@@ -51,11 +47,14 @@ public class CastDroidStoreDAO implements PodCastsDAO {
     /** Perform the query when a parameter is added or wait to the caller event */
     private boolean autoQueryChannels = false;
 
+    /** Gets information of paid and free channels (<code>true</code>) or only for free channels (<code>false</code>)*/
+    private boolean searchPaidChannels = false;
+
     /**
      * Constructor of the class that initializes the connection object
      * and the ITunes parameters map
      */
-    public CastDroidStoreDAO() {
+    CastDroidStoreDAO() {
         this.connectionManager = new ConnectionManager();
         this.queryParametersMap = new HashMap<>();
         LOGGER.setLevel(Level.INFO);
@@ -63,8 +62,13 @@ public class CastDroidStoreDAO implements PodCastsDAO {
 
 //region PodCastsDAO implementation
 
+    /**
+     * Updates the main term parameter used to search in the ITunes store
+     * @param term term value
+     * @return channels returned as result of the query if the auto query option is enabled
+     */
     @Override
-    public List<PodCastChannelDTO> updateTermSearchParameter(String term) {
+    public List<ChannelInformation> updateTermSearchParameter(String term) {
         // Store value
         if (term == null || term.equalsIgnoreCase("")) {
             removeUriParameter(ITunesSearchKeys.TERM.toString());
@@ -74,8 +78,13 @@ public class CastDroidStoreDAO implements PodCastsDAO {
         return (this.autoQueryChannels? executeUriForITunes() : null);
     }
 
+    /**
+     * Updates the artist term parameter used to search in the ITunes store
+     * @param artist artist value
+     * @return channels returned as result of the query if the auto query option is enabled
+     */
     @Override
-    public List<PodCastChannelDTO> updateArtistSearchParameter(String artist) {
+    public List<ChannelInformation> updateArtistSearchParameter(String artist) {
         // Store value
         if (artist == null || artist.equalsIgnoreCase("")) {
             removeUriParameter(ITunesSpecificPodCastKeys.SEARCH_ATTRIBUTE_PODCAST_ARTIST.toString());
@@ -85,8 +94,13 @@ public class CastDroidStoreDAO implements PodCastsDAO {
         return (this.autoQueryChannels? executeUriForITunes() : null);
     }
 
+    /**
+     * Updates the author term parameter used to search in the ITunes store
+     * @param author author value
+     * @return channels returned as result of the query if the auto query option is enabled
+     */
     @Override
-    public List<PodCastChannelDTO> updateAuthorSearchParameter(String author) {
+    public List<ChannelInformation> updateAuthorSearchParameter(String author) {
         // Store value
         if (author == null || author.equalsIgnoreCase("")) {
             removeUriParameter(ITunesSpecificPodCastKeys.SEARCH_ATTRIBUTE_PODCAST_AUTHOR.toString());
@@ -96,8 +110,12 @@ public class CastDroidStoreDAO implements PodCastsDAO {
         return (this.autoQueryChannels? executeUriForITunes() : null);
     }
 
+    /**
+     * Sets the limit of channels returned per query. Default value is 50, minimum value is 1 and max value is 200
+     * @param number max number of channels returned per query
+     */
     @Override
-    public void setResultsLimit(int number) {
+    public void setChannelResultsLimit(int number) {
         if (number < MAX_RESULTS && number > MIN_RESULTS) {
             addUriParameter(ITunesSearchKeys.LIMIT.toString(), Integer.toString(number));
         } else if (number == 0) {
@@ -107,31 +125,93 @@ public class CastDroidStoreDAO implements PodCastsDAO {
         }
     }
 
+    /**
+     * Enables / disables the auto query option. If enabled, when the search parameters are updated, the query is
+     * automatically executed. If disabled, the query is only executed when calling the executeQueryOnDemand method
+     * @param autoQuery <code>true</code> enables the auto query functionality
+     *                  <code>false</code> disables the auto query functionality
+     */
     @Override
     public void setAutoQueryChannelsOption(boolean autoQuery) {
         this.autoQueryChannels = autoQuery;
     }
 
+    /**
+     * Executes the query instantly based on the stored parameters, if any
+     * @return list of channels returned as result of the query
+     */
     @Override
-    public List<PodCastChannelDTO> executeQueryOnDemand() {
+    public List<ChannelInformation> executeQueryOnDemand() {
         return executeUriForITunes();
     }
 
+    /**
+     * Gets enriched channel information from a particular channel passed as an argument. This method will add
+     * information such as copyright, detailed descriptions, list of episodes... for the ChannelInformation object
+     * @param selectedChannel channel to be updated with detailed information
+     * @param getEpisodes <code>true</code> the channel is filled with episodes information - It may be a time consuming process
+     *                    <code>false</code> then channel is not filled with episodes information
+     */
     @Override
-    public EnrichedChannel getEnrichedChannelInformation(PodCastChannelDTO selectedChannel) {
-        return null;
+    public void getEnrichedChannelInformation(ChannelInformation selectedChannel, boolean getEpisodes) {
+        if (selectedChannel != null) {
+            Document channelAdditionalInfo = executeUriForFeed(selectedChannel.getFeedUrl());
+            ChannelsFactory.enrichChannelFromAuthorsInformation(channelAdditionalInfo, selectedChannel);
+            if (getEpisodes) {
+                selectedChannel.addEpisodes(EpisodesFactory.getParsedListOfEpisodesFromDocument(channelAdditionalInfo));
+            }
+        }
     }
 
+    /**
+     * Gets enriched channel information from a particular channel passed as an argument. This method will add
+     * information such as copyright, detailed descriptions, list of episodes... for the ChannelInformation object.
+     * In this case, the channel will be filled with episodes information if possible
+     * @param selectedChannel channel to be updated with detailed information
+     */
     @Override
-    public List<SingleEpisode> getListOfEpisodesFromChannel(PodCastChannelDTO selectedChannel) {
-        return getListOfEpisodesFromUrl(selectedChannel.feedUrl);
+    public void getEnrichedChannelInformation(ChannelInformation selectedChannel) {
+        getEnrichedChannelInformation(selectedChannel, true);
     }
 
+    /**
+     * Gets the list of episodes related to a particular channel. No additional information is added to the channel object
+     * @param selectedChannel channel to get the episodes from
+     * @return list of episodes
+     */
+    @Override
+    public List<SingleEpisode> getListOfEpisodesFromChannel(ChannelInformation selectedChannel) {
+        if (selectedChannel != null) {
+            return getListOfEpisodesFromUrl(selectedChannel.getFeedUrl());
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Gets the list of episodes based on a particular URL, if possible
+     * @param url URL to be used to get the episodes information from
+     * @return list of episodes
+     */
     @Override
     public List<SingleEpisode> getListOfEpisodesFromUrl(String url) {
         // Check valid url
         Document deserializeMessage = executeUriForFeed(url);
-        return getParsedListOfEpisodes(deserializeMessage);
+        if (deserializeMessage != null) {
+            return EpisodesFactory.getParsedListOfEpisodesFromDocument(deserializeMessage);
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Sets if the search of channels will be based on paid and free channels (<code>true</code>) or only over free
+     * channels (<code>false</code>). By default the value of this flag is false.
+     * @param searchPaidChannels new value for the flag
+     */
+    @Override
+    public void setSearchPaidChannels(boolean searchPaidChannels) {
+        this.searchPaidChannels = searchPaidChannels;
     }
 
 //endregion
@@ -161,38 +241,23 @@ public class CastDroidStoreDAO implements PodCastsDAO {
     }
 
     /**
-     * Gets the full list of parsed episodes form a channel based on the returned XML
-     * @param deserializedMessage document that contains the received XML
-     * @return list of channel episodes
-     */
-    private List<SingleEpisode> getParsedListOfEpisodes(Document deserializedMessage) {
-        // Look for the items of the deserialized message
-        List<SingleEpisode> parsedEpisodes = new ArrayList<>();
-        NodeList itemList = deserializedMessage.getElementsByTagName(XmlFeedConstants.XML_ITEM_TAG);
-        for (int index = 0; index < itemList.getLength(); index++) {
-            Node item = itemList.item(index);
-            // Once the items are found, the method iterate through them to parse them into SingleEpisode elements
-            if (item.getNodeType() == Node.ELEMENT_NODE) {
-                Element episodeToParse = (Element) item;
-                SingleEpisode episode = EpisodesFactory.createEpisodeFromXml(episodeToParse);
-                if (episode != null) {
-                    parsedEpisodes.add(episode);
-                }
-            }
-        }
-        return parsedEpisodes;
-    }
-
-    /**
      * Executes the GET REST request over the ITunes store
      * @return list of channels returned based on the search terms
      */
-    private List<PodCastChannelDTO> executeUriForITunes() {
-        List<PodCastChannelDTO> returnedChannels = null;
+    private List<ChannelInformation> executeUriForITunes() {
+        List<ChannelInformation> returnedChannels = new ArrayList<>();
         String url = createFullQuery();
         if (url != null && isValidUri(url)) {
             // Perform the GET request and parse the answer
-            returnedChannels = parseRoughMessage(this.connectionManager.performGetRequest(url));
+            List<PodCastChannelDTO> roughChannels = parseRoughMessage(this.connectionManager.performGetRequest(url));
+            // Parse each one of the DTOs into the channel information final object
+            ChannelsFactory.considerPaidChannels(this.searchPaidChannels);
+            roughChannels.forEach(roughChannel -> {
+                ChannelInformation parsedChannel = ChannelsFactory.createChannelFromDTO(roughChannel);
+                if (parsedChannel != null) {
+                    returnedChannels.add(parsedChannel);
+                }
+            });
         } else {
             LOGGER.log(Level.WARNING,"Unable to generate a valid url with the provided parameters");
         }
@@ -205,18 +270,14 @@ public class CastDroidStoreDAO implements PodCastsDAO {
      * @param value parameters value
      */
     private void addUriParameter(String key, String value) {
-        try {
-            if (this.queryParametersMap != null) {
-                if (key != null && value != null ) {
-                    this.queryParametersMap.put(key, URLEncoder.encode(value, "UTF-8"));
-                } else {
-                    LOGGER.log(Level.WARNING,"Invalid key or value provided");
-                }
+        if (this.queryParametersMap != null) {
+            if (key != null && value != null ) {
+                this.queryParametersMap.put(key, URLEncoder.encode(value, StandardCharsets.UTF_8));
             } else {
-                LOGGER.log(Level.SEVERE,"Query parameter map not correctly initialized");
+                LOGGER.log(Level.WARNING,"Invalid key or value provided");
             }
-        } catch (UnsupportedEncodingException ex) {
-            LOGGER.log(Level.WARNING, "Unable to encode the term " + value + "into URL format");
+        } else {
+            LOGGER.log(Level.SEVERE,"Query parameter map not correctly initialized");
         }
     }
 
@@ -305,7 +366,13 @@ public class CastDroidStoreDAO implements PodCastsDAO {
         }
     }
 
-
+    /**
+     * Creates a single parameter to be added to the URI in its final form (key plus value)
+     * @param parameter key of the parameter to be added
+     * @param value value of the parameter to be added
+     * @param lastParameter flag to operate it as final parameter or not and add the separation
+     * @return string with the parameter created
+     */
     private String createParameterForUri(String parameter, String value, boolean lastParameter) {
         String parameterCreated = parameter + GenericITunesConstants.ITUNES_PARAMETER_EQUAL + value;
         if (!lastParameter) {
@@ -315,6 +382,10 @@ public class CastDroidStoreDAO implements PodCastsDAO {
         }
     }
 
+    /**
+     * Adds default URI parameters. Parameters added by default are:
+     * - entity = podcast
+     */
     private void addDefaultUriParameters() {
         this.queryParametersMap.put(ITunesSearchKeys.ENTITY.toString(),
                 ITunesSpecificPodCastKeys.SEARCH_TERM_PODCAST.toString());
