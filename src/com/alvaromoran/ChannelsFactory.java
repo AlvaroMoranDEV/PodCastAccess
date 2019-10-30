@@ -30,7 +30,7 @@ class ChannelsFactory {
      * @param roughChannelInfo rough channel information parsed from the JSON
      * @return well-formed ChannelInformation
      */
-    public static ChannelInformation createChannelFromDTO(PodCastChannelDTO roughChannelInfo) {
+    static ChannelInformation createChannelFromDTO(PodCastChannelDTO roughChannelInfo) {
         if (isValidRoughInformation(roughChannelInfo)) {
             ChannelInformation newChannel = new ChannelInformation(roughChannelInfo.collectionName);
             // Fill other information
@@ -50,13 +50,15 @@ class ChannelsFactory {
      * @param deserializedMessage XML parsed document from the channels provider
      * @param channelInformation base channel information to be updated
      */
-    public static void enrichChannelFromAuthorsInformation(Document deserializedMessage, ChannelInformation channelInformation) {
+    static void enrichChannelFromAuthorsInformation(Document deserializedMessage, ChannelInformation channelInformation) {
         Element channelElement = getChannelElement(deserializedMessage);
-        channelInformation.setDescription(getDescription(channelElement));
-        channelInformation.setLink(getLink(channelElement));
-        channelInformation.setCopyright(getCopyright(channelElement));
-        channelInformation.setAuthor(getAuthor(channelElement));
-        channelInformation.setSummary(getSummary(channelElement));
+        if (channelElement != null) {
+            channelInformation.setDescription(getDescription(channelElement));
+            channelInformation.setLink(getLink(channelElement));
+            channelInformation.setCopyright(getCopyright(channelElement));
+            channelInformation.setAuthor(getAuthor(channelElement));
+            channelInformation.setSummary(getSummary(channelElement));
+        }
     }
 
     /**
@@ -65,7 +67,7 @@ class ChannelsFactory {
      * If <code>false</code> only free channels will be taken into consideration
      * @param newValue new value for the flag
      */
-    public static void considerPaidChannels(boolean newValue) {
+    static void considerPaidChannels(boolean newValue) {
         ChannelsFactory.createPaidChannels = newValue;
     }
 

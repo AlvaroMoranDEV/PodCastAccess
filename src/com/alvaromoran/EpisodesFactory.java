@@ -22,6 +22,31 @@ class EpisodesFactory {
     private static final Logger LOGGER = Logger.getLogger(EpisodesFactory.class.getName());
 
     /**
+     * Gets the full list of parsed episodes form a channel based on the returned XML
+     * @param deserializedMessage document that contains the received XML
+     * @return list of channel episodes
+     */
+    static List<SingleEpisode> getParsedListOfEpisodesFromDocument(Document deserializedMessage) {
+        // Look for the items of the deserialized message
+        List<SingleEpisode> parsedEpisodes = new ArrayList<>();
+        if (deserializedMessage != null) {
+            NodeList itemList = deserializedMessage.getElementsByTagName(XmlFeedConstants.XML_ITEM_TAG);
+            for (int index = 0; index < itemList.getLength(); index++) {
+                Node item = itemList.item(index);
+                // Once the items are found, the method iterate through them to parse them into SingleEpisode elements
+                if (item.getNodeType() == Node.ELEMENT_NODE) {
+                    Element episodeToParse = (Element) item;
+                    SingleEpisode episode = EpisodesFactory.createEpisodeFromElement(episodeToParse);
+                    if (episode != null) {
+                        parsedEpisodes.add(episode);
+                    }
+                }
+            }
+        }
+        return parsedEpisodes;
+    }
+
+    /**
      * Creates the SingleEpisode object based on the item node of the XML gathered from the channel provider
      * @param nodeInformation  item node of the XML
      * @return well-formed SingleEpisode class if possible
@@ -67,31 +92,6 @@ class EpisodesFactory {
     }
 
     /**
-     * Gets the full list of parsed episodes form a channel based on the returned XML
-     * @param deserializedMessage document that contains the received XML
-     * @return list of channel episodes
-     */
-    public static List<SingleEpisode> getParsedListOfEpisodesFromDocument(Document deserializedMessage) {
-        // Look for the items of the deserialized message
-        List<SingleEpisode> parsedEpisodes = new ArrayList<>();
-        if (deserializedMessage != null) {
-            NodeList itemList = deserializedMessage.getElementsByTagName(XmlFeedConstants.XML_ITEM_TAG);
-            for (int index = 0; index < itemList.getLength(); index++) {
-                Node item = itemList.item(index);
-                // Once the items are found, the method iterate through them to parse them into SingleEpisode elements
-                if (item.getNodeType() == Node.ELEMENT_NODE) {
-                    Element episodeToParse = (Element) item;
-                    SingleEpisode episode = EpisodesFactory.createEpisodeFromElement(episodeToParse);
-                    if (episode != null) {
-                        parsedEpisodes.add(episode);
-                    }
-                }
-            }
-        }
-        return parsedEpisodes;
-    }
-
-    /**
      * Gets the title information from the item element node
      * @param nodeInformation channel node of the XML gathered from the channels provider
      * @return parsed title
@@ -112,12 +112,11 @@ class EpisodesFactory {
      * @return parsed AudioInformation object with the URL of the audio, its format and length
      */
     private static AudioInformation parseAudioInformation(Element nodeInformation) throws NumberFormatException {
-        AudioInformation audioInformation;
         if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_ENCLOSURE).item(0) != null) {
             NamedNodeMap attributes = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_ENCLOSURE).item(0).getAttributes();
             if (attributes != null) {
                 String url = attributes.getNamedItem(XmlFeedConstants.XML_ENCLOSURE_URL).getTextContent();
-                int length = Integer.valueOf(attributes.getNamedItem(XmlFeedConstants.XML_ENCLOSURE_LENGTH).getTextContent());
+                int length = Integer.parseInt(attributes.getNamedItem(XmlFeedConstants.XML_ENCLOSURE_LENGTH).getTextContent());
                 String type = attributes.getNamedItem(XmlFeedConstants.XML_ENCLOSURE_TYPE).getTextContent();
                 if (url != null) {
                     return new AudioInformation(url, type, length);
@@ -233,9 +232,9 @@ class EpisodesFactory {
     private static int parseSeason(Element nodeInformation) throws NumberFormatException {
         int season = -1;
         if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_SEASON, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            season = Integer.valueOf(nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_SEASON, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent());
+            season = Integer.parseInt(nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_SEASON, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent());
         } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_SEASON).item(0) != null) {
-            season = Integer.valueOf(nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_SEASON).item(0).getTextContent());
+            season = Integer.parseInt(nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_SEASON).item(0).getTextContent());
         }
         return season;
     }
@@ -248,9 +247,9 @@ class EpisodesFactory {
     private static int parseEpisodeNumber(Element nodeInformation) throws NumberFormatException {
         int episodeNumber = -1;
         if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_EPISODE, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            episodeNumber = Integer.valueOf(nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_EPISODE, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent());
+            episodeNumber = Integer.parseInt(nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_EPISODE, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent());
         } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_EPISODE).item(0) != null) {
-            episodeNumber = Integer.valueOf(nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_EPISODE).item(0).getTextContent());
+            episodeNumber = Integer.parseInt(nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_EPISODE).item(0).getTextContent());
         }
         return episodeNumber;
     }
