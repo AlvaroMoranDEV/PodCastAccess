@@ -1,9 +1,5 @@
 # PodCastAccess
-PodCastAccess is a library built in Java11 (in particular, 11.0.3)  that provides access to PodCast information through ITunes Store. This library has been built by using IntelliJ IDE. Feel free to use it and modify it according to your needs.
-
-[TOCM]
-
-This library is under the MIT license.
+PodCastAccess is a library built in Java11 (in particular, 11.0.3)  that provides access to PodCast information through ITunes Store. This library has been built by using IntelliJ IDE. Feel free to use it and modify it according to your needs (library under MIT license).
 
 ## Using the library
 
@@ -13,6 +9,8 @@ To install this library just import the PodCastAccess.jar file into your project
 The compiled JAR is located in this repository in the following link:
 
 [Compiled JAR V0.1](https://github.com/AlvaroMoranDEV/PodCastAccess/tree/master/out/artifacts/PodCastAccess_jar)
+
+Or... you just have to import the code into your own application and do the modifications you want!
 
 ### Data Access Object
 The library provides a public interface with the needed methods to access both channels and episodes information. The interface is called
@@ -30,12 +28,10 @@ The information about PodCast channels is gathered from the ITunes Store. More i
 To search by these parameters the following methods are provided in the interface:
 ```
 List<ChannelInformation> updateTermSearchParameter(String term);
-List<ChannelInformation>  updateArtistSearchParameter(String artist);
-List<ChannelInformation>  updateAuthorSearchParameter(String author);
+List<ChannelInformation> updateArtistSearchParameter(String artist);
+List<ChannelInformation> updateAuthorSearchParameter(String author);
 ```
 When updating one of these search parameters, the library automatically performs a query over the ITunes store (if it is configured to do so, see section *Additional configurations* for more information) and returns the list of results provided in form of a ChannelInformation object.
-
-------------
 
 ### Accessing PodCast episodes and additional channel information
 There are different ways of getting the list of episodes for a single channel:
@@ -75,9 +71,6 @@ If you only want to get the list of episodes of a podcast channel without the Ch
 ```
 List<SingleEpisode> getListOfEpisodesFromUrl(String url);
 ```
-
-------------
-
 
 ### ChannelInformation class
 In this section we will discuss the information provided by the ChannelInformation class. This class will be filled with information, both from the ITunes store API and the contents author:
@@ -124,7 +117,8 @@ void setSearchPaidChannels(boolean searchPaidChannels);
 ```
 void setAutoQueryChannelsOption(boolean autoQuery);
 ```
-	If it is disabled (value *false*) the search will only be performed when the following method is called:
+	
+   If it is disabled (value *false*) the search will only be performed when the following method is called:
 ```
 List<ChannelInformation> executeQueryOnDemand();
 ```
