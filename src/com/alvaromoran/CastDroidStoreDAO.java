@@ -27,7 +27,7 @@ import java.util.logging.Logger;
  * @author AlvaroMoranDEV
  * @version 0.1
  */
-class CastDroidStoreDAO implements PodCastsDAO {
+public class CastDroidStoreDAO implements PodCastsDAO {
 
     /** Logger of the class */
     private static final Logger LOGGER = Logger.getLogger(CastDroidStoreDAO.class.getName());
