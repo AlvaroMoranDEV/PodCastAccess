@@ -13,6 +13,7 @@ import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -272,7 +273,12 @@ public class CastDroidStoreDAO implements PodCastsDAO {
     private void addUriParameter(String key, String value) {
         if (this.queryParametersMap != null) {
             if (key != null && value != null ) {
-                this.queryParametersMap.put(key, URLEncoder.encode(value, StandardCharsets.UTF_8));
+                try {
+                    this.queryParametersMap.put(key, URLEncoder.encode(value, StandardCharsets.UTF_8.toString()));
+                } catch (UnsupportedEncodingException e) {
+                    LOGGER.log(Level.SEVERE, "UnsupportedEncodingException when adding key to URL - Key: " +
+                            key + ", Encoding: " + StandardCharsets.UTF_8.toString());
+                }
             } else {
                 LOGGER.log(Level.WARNING,"Invalid key or value provided");
             }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="PodCastAccess:jar" />
+      <artifact name="PodCastAccess_v0.1.jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
@@ -12,6 +12,9 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="PodCastAccess" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -69,7 +72,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CastDroidStoreDAOTest">
+  <component name="RunManager" selected="JUnit.All in PodCastAccess">
     <configuration name="All in PodCastAccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PodCastAccess" />
       <option name="PACKAGE_NAME" value="" />
@@ -143,11 +146,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in PodCastAccess" />
         <item itemvalue="JUnit.CastDroidStoreDAOTest" />
         <item itemvalue="JUnit.CastDroidStoreDAOTest.getEnrichedChannelInformationGoodChannel" />
         <item itemvalue="JUnit.CastDroidStoreDAOTest.executeQueryOnDemandNotValidQueryAfterValidQuery" />
         <item itemvalue="JUnit.CastDroidStoreDAOTest.getListOfEpisodesFromUrl" />
-        <item itemvalue="JUnit.All in PodCastAccess" />
       </list>
     </recent_temporary>
   </component>

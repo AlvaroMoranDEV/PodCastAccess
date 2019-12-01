@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="PodCastAccess:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/PodCastAccess_jar</output-path>
+  <artifact type="jar" name="PodCastAccess_v0.1.jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PodCastAccess_v0_1_jar</output-path>
     <root id="archive" name="PodCastAccess.jar">
       <element id="module-output" name="PodCastAccess" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/junit-jupiter-5.4.2.jar" path-in-jar="/" />
@@ -11,7 +11,6 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/junit-jupiter-params-5.4.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/junit-jupiter-engine-5.4.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/junit-platform-engine-1.4.2.jar" path-in-jar="/" />
-      <element id="library" level="project" name="simple-xml-2.7" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/gson-2.6.2.jar" path-in-jar="/" />
     </root>
   </artifact>
