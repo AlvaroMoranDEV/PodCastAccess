@@ -55,7 +55,7 @@ public class CastDroidStoreDAO implements PodCastsDAO {
      * Constructor of the class that initializes the connection object
      * and the ITunes parameters map
      */
-    CastDroidStoreDAO() {
+    public CastDroidStoreDAO() {
         this.connectionManager = new ConnectionManager();
         this.queryParametersMap = new HashMap<>();
         LOGGER.setLevel(Level.INFO);
