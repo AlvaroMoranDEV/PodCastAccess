@@ -38,6 +38,7 @@ class ChannelsFactory {
             newChannel.setImageUrlHigh(roughChannelInfo.artworkUrl600);
             newChannel.setFeedUrl(roughChannelInfo.feedUrl);
             newChannel.setCategories(roughChannelInfo.genres);
+            newChannel.setAuthor(roughChannelInfo.artistName);
             return newChannel;
         } else {
             return null;
