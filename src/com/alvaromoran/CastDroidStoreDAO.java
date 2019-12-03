@@ -253,12 +253,14 @@ public class CastDroidStoreDAO implements PodCastsDAO {
             List<PodCastChannelDTO> roughChannels = parseRoughMessage(this.connectionManager.performGetRequest(url));
             // Parse each one of the DTOs into the channel information final object
             ChannelsFactory.considerPaidChannels(this.searchPaidChannels);
-            roughChannels.forEach(roughChannel -> {
-                ChannelInformation parsedChannel = ChannelsFactory.createChannelFromDTO(roughChannel);
-                if (parsedChannel != null) {
-                    returnedChannels.add(parsedChannel);
+            if (roughChannels != null && roughChannels.size() > 0) {
+                for (int index = 0; index < roughChannels.size(); index++) {
+                    ChannelInformation parsedChannel = ChannelsFactory.createChannelFromDTO(roughChannels.get(index));
+                    if (parsedChannel != null) {
+                        returnedChannels.add(parsedChannel);
+                    }
                 }
-            });
+            }
         } else {
             LOGGER.log(Level.WARNING,"Unable to generate a valid url with the provided parameters");
         }
