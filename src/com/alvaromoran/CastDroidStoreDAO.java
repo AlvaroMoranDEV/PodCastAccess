@@ -10,9 +10,11 @@ import com.alvaromoran.data.PodCastChannelDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -227,7 +229,9 @@ public class CastDroidStoreDAO implements PodCastsDAO {
             try {
                 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-                Document parsedDoc = dBuilder.parse(feedUrl);
+                String notParsedMessage = this.connectionManager.performGetRequest(feedUrl);
+                InputSource inputSource = new InputSource(new StringReader(notParsedMessage));
+                Document parsedDoc = dBuilder.parse(inputSource);
                 parsedDoc.getDocumentElement().normalize();
                 return parsedDoc;
             } catch (Exception e) {

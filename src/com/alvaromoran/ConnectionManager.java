@@ -31,17 +31,20 @@ class ConnectionManager {
      * @return string returned as an answer
      */
     public String performGetRequest(String url) {
-        String result = null;
+        // String buffer
+        StringBuffer bufferedAnswer = new StringBuffer();
         try {
             // Connection open
             openConnection(url);
+            // Check connection correct
             if (this.performingConnection) {
-                this.connection.setRequestMethod("GET");
+                // Line buff
+                String readLine = null;
                 LOGGER.log(Level.FINE, "Performing HTTP GET REST request over {}", url);
-                // Buffering answer
-                InputStream in = new BufferedInputStream(this.connection.getInputStream());
-                result = new BufferedReader(new InputStreamReader(in))
-                        .lines().collect(Collectors.joining("\n"));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(this.connection.getInputStream()));
+                while ((readLine = bufferedReader.readLine()) != null) {
+                    bufferedAnswer.append(readLine);
+                }
             } else {
                 LOGGER.log(Level.WARNING, "Attempting to perform a GET request without specified URL");
             }
@@ -51,7 +54,7 @@ class ConnectionManager {
             // Close the connection once the operation has ended
             closeConnection();
         }
-        return result;
+        return bufferedAnswer.toString();
     }
 
     /**
@@ -61,9 +64,48 @@ class ConnectionManager {
      */
     private void openConnection(String url) throws IOException {
         URL urlObject = new URL(url);
-        this.connection = (HttpURLConnection) urlObject.openConnection();
         this.performingConnection = true;
+        this.connection = (HttpURLConnection) urlObject.openConnection();
+        // Manage redirections
+        this.connection.setInstanceFollowRedirects(true);
         LOGGER.log(Level.FINE, "Opening connection over URL: " + url);
+        manageRedirections();
+    }
+
+    /**
+     * Manages redirection between different URL if needed according to the response code
+     * @throws IOException exception throw while trying to open the connection
+     */
+    private void manageRedirections() throws IOException {
+        if (isRedirected(this.connection.getResponseCode())) {
+            String newUrl = this.connection.getHeaderField("Location");
+            LOGGER.log(Level.FINE, "Performing redirection to new URL: " + newUrl);
+            closeConnection();
+            openConnection(newUrl);
+        }
+    }
+
+    /**
+     * Checks if the connection needs to be redirected according to the answer
+     * @param response answer received when establishing connection
+     * @return <code>true</code> if the connection needs to be redirected
+     */
+    private boolean isRedirected(int response) {
+        if (response != HttpURLConnection.HTTP_OK) {
+            if (response == HttpURLConnection.HTTP_MOVED_TEMP
+                    || response == HttpURLConnection.HTTP_MOVED_PERM
+                    || response == HttpURLConnection.HTTP_SEE_OTHER) {
+                // Redirected
+                LOGGER.log(Level.FINE, "Received code to perform redirection: " + response);
+                return true;
+            } else {
+                // No redirected - error maybe
+                return false;
+            }
+        } else {
+            // Connection OK
+            return false;
+        }
     }
 
     /**
