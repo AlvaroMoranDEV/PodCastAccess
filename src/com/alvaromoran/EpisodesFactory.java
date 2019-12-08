@@ -115,10 +115,21 @@ class EpisodesFactory {
         if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_ENCLOSURE).item(0) != null) {
             NamedNodeMap attributes = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_ENCLOSURE).item(0).getAttributes();
             if (attributes != null) {
-                String url = attributes.getNamedItem(XmlFeedConstants.XML_ENCLOSURE_URL).getTextContent();
-                int length = Integer.parseInt(attributes.getNamedItem(XmlFeedConstants.XML_ENCLOSURE_LENGTH).getTextContent());
-                String type = attributes.getNamedItem(XmlFeedConstants.XML_ENCLOSURE_TYPE).getTextContent();
-                if (url != null) {
+                // Default attribute values
+                String url = "";
+                int length = 0;
+                String type = "";
+                // Check what attributes are valid and filled
+                if (attributes.getNamedItem(XmlFeedConstants.XML_ENCLOSURE_URL) != null) {
+                    url = attributes.getNamedItem(XmlFeedConstants.XML_ENCLOSURE_URL).getTextContent();
+                }
+                if (attributes.getNamedItem(XmlFeedConstants.XML_ENCLOSURE_LENGTH) != null) {
+                    length = Integer.parseInt(attributes.getNamedItem(XmlFeedConstants.XML_ENCLOSURE_LENGTH).getTextContent());
+                }
+                if (attributes.getNamedItem(XmlFeedConstants.XML_ENCLOSURE_TYPE) != null) {
+                    type = attributes.getNamedItem(XmlFeedConstants.XML_ENCLOSURE_TYPE).getTextContent();
+                }
+                if ( url != null && url != "" ) {
                     return new AudioInformation(url, type, length);
                 } else {
                     LOGGER.log(Level.WARNING, "Received item with null url - Item will be discarded");
