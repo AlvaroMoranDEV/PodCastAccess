@@ -38,6 +38,9 @@ public class SingleEpisode {
     /** Episode audio information */
     private AudioInformation audioInformation;
 
+    /** Episode image reference */
+    private String imageUrl;
+
     /**
      * Constructor of the class with the mandatory fields
      * @param title episode title
@@ -120,6 +123,14 @@ public class SingleEpisode {
 
     public void setEpisode(int episode) {
         this.episode = episode;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 //endregion
 }

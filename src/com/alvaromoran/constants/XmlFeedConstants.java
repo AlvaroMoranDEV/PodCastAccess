@@ -50,6 +50,9 @@ public class XmlFeedConstants {
     /** Season number element */
     public static final String XML_ITEM_SEASON = "season";
 
+    /** Image element*/
+    public static final String XML_ITEM_IMAGE = "image";
+
     /** Enclosure element */
     public static final String XML_ENCLOSURE_URL = "url";
 
@@ -59,6 +62,9 @@ public class XmlFeedConstants {
     /** Audio type element */
     public static final String XML_ENCLOSURE_TYPE = "type";
 
+    /** Image reference element */
+    public static final String XML_IMAGE_HREF = "href";
+
     /** ITunes namespace */
-    public static final String XML_ITUNES_NS = "itunes";
+    public static final String XML_ITUNES_NS = "http://www.itunes.com/dtds/podcast-1.0.dtd";
 }

@@ -62,6 +62,7 @@ class EpisodesFactory {
                 String description = parseDescription(nodeInformation);
                 String releaseDate = parseReleaseDate(nodeInformation);
                 String keywords = parseKeywords(nodeInformation);
+                String imageUrl = parseImage(nodeInformation);
                 AudioInformation audio = parseAudioInformation(nodeInformation);
                 int season = parseSeason(nodeInformation);
                 int episodeNumber = parseEpisodeNumber(nodeInformation);
@@ -76,6 +77,7 @@ class EpisodesFactory {
                     episode.setKeywords(keywords);
                     episode.setSeason(season);
                     episode.setEpisode(episodeNumber);
+                    episode.setImageUrl(imageUrl);
                     return episode;
                     // Otherwise, the episode is discarded
                 } else {
@@ -98,8 +100,8 @@ class EpisodesFactory {
      */
     private static String parseTitle(Element nodeInformation) throws NullPointerException {
         String title = null;
-        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_TITLE, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            title = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_TITLE, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent();
+        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_TITLE).item(0) != null) {
+            title = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_TITLE).item(0).getTextContent();
          } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_TITLE).item(0) != null) {
             title = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_TITLE).item(0).getTextContent();
         }
@@ -146,14 +148,42 @@ class EpisodesFactory {
     }
 
     /**
+     * Gets the image information from the item element node - this field is optional so no warning logs are displayed
+     * @param nodeInformation channel node of the XML gathered from the channels provider
+     * @return parsed image reference or null if empty
+     */
+    private static String parseImage(Element nodeInformation) {
+        String url = null;
+        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_IMAGE).item(0) != null) {
+            NamedNodeMap imageInfo = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_IMAGE).item(0).getAttributes();
+            if (imageInfo != null) {
+                // Check that the image is populated with the image url
+                if (imageInfo.getNamedItem(XmlFeedConstants.XML_IMAGE_HREF) != null) {
+                    url = imageInfo.getNamedItem(XmlFeedConstants.XML_IMAGE_HREF).getTextContent();
+                }
+            }
+        } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_IMAGE).item(0) != null) {
+            NamedNodeMap imageInfo = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_IMAGE).item(0).getAttributes();
+            if (imageInfo != null) {
+                // Check that the image is populated with the image url
+                if (imageInfo.getNamedItem(XmlFeedConstants.XML_IMAGE_HREF) != null) {
+                    url = imageInfo.getNamedItem(XmlFeedConstants.XML_IMAGE_HREF).getTextContent();
+                }
+            }
+        }
+        // Return the url
+        return url;
+    }
+
+    /**
      * Gets the subtitle information from the item element node
      * @param nodeInformation channel node of the XML gathered from the channels provider
      * @return parsed subtitle
      */
     private static String parseSubTitle(Element nodeInformation) {
         String subtitle = null;
-        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_SUBTITLE, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            subtitle = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_SUBTITLE, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent();
+        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_SUBTITLE).item(0) != null) {
+            subtitle = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_SUBTITLE).item(0).getTextContent();
         } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_SUBTITLE).item(0) != null) {
             subtitle = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_SUBTITLE).item(0).getTextContent();
         }
@@ -167,8 +197,8 @@ class EpisodesFactory {
      */
     private static String parseSummary(Element nodeInformation) {
         String summary = null;
-        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_SUMMARY, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            summary = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_SUMMARY, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent();
+        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_SUMMARY).item(0) != null) {
+            summary = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_SUMMARY).item(0).getTextContent();
         } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_SUMMARY).item(0) != null) {
             summary = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_SUMMARY).item(0).getTextContent();
         }
@@ -182,8 +212,8 @@ class EpisodesFactory {
      */
     private static String parseDuration(Element nodeInformation) {
         String duration = null;
-        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_DURATION, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            duration = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_DURATION, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent();
+        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_DURATION).item(0) != null) {
+            duration = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_DURATION).item(0).getTextContent();
         } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_DURATION).item(0) != null) {
             duration = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_DURATION).item(0).getTextContent();
         }
@@ -197,8 +227,8 @@ class EpisodesFactory {
      */
     private static String parseDescription(Element nodeInformation) {
         String description = null;
-        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_DESCRIPTION, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            description = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_DESCRIPTION, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent();
+        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_DESCRIPTION).item(0) != null) {
+            description = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_DESCRIPTION).item(0).getTextContent();
         } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_DESCRIPTION).item(0) != null) {
             description = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_DESCRIPTION).item(0).getTextContent();
         }
@@ -212,8 +242,8 @@ class EpisodesFactory {
      */
     private static String parseReleaseDate(Element nodeInformation) {
         String pubDate = null;
-        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_PUBDATE, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            pubDate = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_PUBDATE, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent();
+        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_PUBDATE).item(0) != null) {
+            pubDate = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_PUBDATE).item(0).getTextContent();
         } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_PUBDATE).item(0) != null) {
             pubDate = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_PUBDATE).item(0).getTextContent();
         }
@@ -227,8 +257,8 @@ class EpisodesFactory {
      */
     private static String parseKeywords(Element nodeInformation) {
         String pubDate = null;
-        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_KEYWORDS, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            pubDate = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_KEYWORDS, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent();
+        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_KEYWORDS).item(0) != null) {
+            pubDate = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_KEYWORDS).item(0).getTextContent();
         } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_KEYWORDS).item(0) != null) {
             pubDate = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_KEYWORDS).item(0).getTextContent();
         }
@@ -242,8 +272,8 @@ class EpisodesFactory {
      */
     private static int parseSeason(Element nodeInformation) throws NumberFormatException {
         int season = -1;
-        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_SEASON, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            season = Integer.parseInt(nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_SEASON, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent());
+        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_SEASON).item(0) != null) {
+            season = Integer.parseInt(nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_SEASON).item(0).getTextContent());
         } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_SEASON).item(0) != null) {
             season = Integer.parseInt(nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_SEASON).item(0).getTextContent());
         }
@@ -257,8 +287,8 @@ class EpisodesFactory {
      */
     private static int parseEpisodeNumber(Element nodeInformation) throws NumberFormatException {
         int episodeNumber = -1;
-        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_EPISODE, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            episodeNumber = Integer.parseInt(nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_EPISODE, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent());
+        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_EPISODE).item(0) != null) {
+            episodeNumber = Integer.parseInt(nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_EPISODE).item(0).getTextContent());
         } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_EPISODE).item(0) != null) {
             episodeNumber = Integer.parseInt(nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_EPISODE).item(0).getTextContent());
         }

@@ -126,8 +126,8 @@ class ChannelsFactory {
      */
     private static String getCopyright(Element nodeInformation) {
         String description = null;
-        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_CHANNEL_COPYRIGHT, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            description = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_CHANNEL_COPYRIGHT, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent();
+        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_CHANNEL_COPYRIGHT).item(0) != null) {
+            description = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_CHANNEL_COPYRIGHT).item(0).getTextContent();
         } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_CHANNEL_COPYRIGHT).item(0) != null) {
             description = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_CHANNEL_COPYRIGHT).item(0).getTextContent();
         }
@@ -141,8 +141,8 @@ class ChannelsFactory {
      */
     private static String getDescription(Element nodeInformation) {
         String description = null;
-        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_DESCRIPTION, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            description = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITEM_DESCRIPTION, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent();
+        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_DESCRIPTION).item(0) != null) {
+            description = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_DESCRIPTION).item(0).getTextContent();
         } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_DESCRIPTION).item(0) != null) {
             description = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_DESCRIPTION).item(0).getTextContent();
         }
@@ -156,8 +156,8 @@ class ChannelsFactory {
      */
     private static String getLink(Element nodeInformation) {
         String description = null;
-        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_CHANNEL_LINK, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            description = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_CHANNEL_LINK, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent();
+        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_CHANNEL_LINK).item(0) != null) {
+            description = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_CHANNEL_LINK).item(0).getTextContent();
         } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_CHANNEL_LINK).item(0) != null) {
             description = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_CHANNEL_LINK).item(0).getTextContent();
         }
@@ -171,8 +171,8 @@ class ChannelsFactory {
      */
     private static String getAuthor(Element nodeInformation) {
         String description = null;
-        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_CHANNEL_AUTHOR, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            description = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_CHANNEL_AUTHOR, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent();
+        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_CHANNEL_AUTHOR).item(0) != null) {
+            description = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_CHANNEL_AUTHOR).item(0).getTextContent();
         } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_CHANNEL_AUTHOR).item(0) != null) {
             description = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_CHANNEL_AUTHOR).item(0).getTextContent();
         }
@@ -186,8 +186,8 @@ class ChannelsFactory {
      */
     private static String getSummary(Element nodeInformation) {
         String description = null;
-        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_CHANNEL_SUMMARY, XmlFeedConstants.XML_ITUNES_NS).item(0) != null) {
-            description = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_CHANNEL_SUMMARY, XmlFeedConstants.XML_ITUNES_NS).item(0).getTextContent();
+        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_CHANNEL_SUMMARY).item(0) != null) {
+            description = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_CHANNEL_SUMMARY).item(0).getTextContent();
         } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_CHANNEL_SUMMARY).item(0) != null) {
             description = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_CHANNEL_SUMMARY).item(0).getTextContent();
         }

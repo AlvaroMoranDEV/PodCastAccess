@@ -142,8 +142,8 @@
       <list>
         <item itemvalue="JUnit.com.alvaromoran in PodCastAccess" />
         <item itemvalue="JUnit.CastDroidStoreDAOTest.getEnrichedChannelInformationWeirdUrl_1" />
-        <item itemvalue="JUnit.All in PodCastAccess" />
         <item itemvalue="JUnit.CastDroidStoreDAOTest" />
+        <item itemvalue="JUnit.All in PodCastAccess" />
         <item itemvalue="JUnit.CastDroidStoreDAOTest.getEnrichedChannelInformationGoodChannel" />
       </list>
     </recent_temporary>
@@ -170,6 +170,8 @@
       <workItem from="1575835240607" duration="607000" />
       <workItem from="1575835864404" duration="4193000" />
       <workItem from="1575840669291" duration="246000" />
+      <workItem from="1575840936385" duration="62000" />
+      <workItem from="1575897165354" duration="3822000" />
     </task>
     <servers />
   </component>
@@ -191,46 +193,50 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="872" y="357" key="#Project_Structure/0.0.2560.1400@0.0.2560.1400" timestamp="1575835835815" />
-    <state width="411" height="466" key="DebuggerActiveHint" timestamp="1575836488961">
+    <state x="1085" y="383" key="#com.intellij.ide.util.MemberChooser" timestamp="1575897584848">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="411" height="466" key="DebuggerActiveHint/0.0.2560.1400@0.0.2560.1400" timestamp="1575836488961" />
+    <state x="1085" y="383" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400@0.0.2560.1400" timestamp="1575897584848" />
+    <state width="463" height="466" key="DebuggerActiveHint" timestamp="1575901087940">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="463" height="466" key="DebuggerActiveHint/0.0.2560.1400@0.0.2560.1400" timestamp="1575901087940" />
     <state x="1060" y="453" key="FileChooserDialogImpl" timestamp="1575835889697">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1060" y="453" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1575835889697" />
-    <state width="1258" height="403" key="GridCell.Tab.0.bottom" timestamp="1575840061640">
+    <state width="2539" height="400" key="GridCell.Tab.0.bottom" timestamp="1575901144328">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="403" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1575840061640" />
-    <state width="1258" height="403" key="GridCell.Tab.0.center" timestamp="1575840061640">
+    <state width="2539" height="400" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1575901144328" />
+    <state width="2539" height="400" key="GridCell.Tab.0.center" timestamp="1575901144328">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="403" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1575840061640" />
-    <state width="1258" height="403" key="GridCell.Tab.0.left" timestamp="1575840061640">
+    <state width="2539" height="400" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1575901144328" />
+    <state width="2539" height="400" key="GridCell.Tab.0.left" timestamp="1575901144328">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="403" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1575840061640" />
-    <state width="1258" height="403" key="GridCell.Tab.0.right" timestamp="1575840061640">
+    <state width="2539" height="400" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1575901144328" />
+    <state width="2539" height="400" key="GridCell.Tab.0.right" timestamp="1575901144328">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="403" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1575840061640" />
-    <state width="1258" height="492" key="GridCell.Tab.1.bottom" timestamp="1575840061636">
+    <state width="2539" height="400" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1575901144328" />
+    <state width="2539" height="489" key="GridCell.Tab.1.bottom" timestamp="1575901137698">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="492" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1575840061636" />
-    <state width="1258" height="492" key="GridCell.Tab.1.center" timestamp="1575840061636">
+    <state width="2539" height="489" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1575901137698" />
+    <state width="2539" height="489" key="GridCell.Tab.1.center" timestamp="1575901137698">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="492" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1575840061636" />
-    <state width="1258" height="492" key="GridCell.Tab.1.left" timestamp="1575840061636">
+    <state width="2539" height="489" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1575901137698" />
+    <state width="2539" height="489" key="GridCell.Tab.1.left" timestamp="1575901137698">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="492" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1575840061636" />
-    <state width="1258" height="492" key="GridCell.Tab.1.right" timestamp="1575840061636">
+    <state width="2539" height="489" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1575901137698" />
+    <state width="2539" height="489" key="GridCell.Tab.1.right" timestamp="1575901137698">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1258" height="492" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1575840061636" />
+    <state width="2539" height="489" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1575901137698" />
     <state x="760" y="273" key="SettingsEditor" timestamp="1575835891628">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -244,36 +250,22 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/tests/com/alvaromoran/CastDroidStoreDAOTest.java</url>
-          <line>184</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/tests/com/alvaromoran/CastDroidStoreDAOTest.java</url>
-          <line>247</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/alvaromoran/CastDroidStoreDAO.java</url>
-          <line>230</line>
-          <option name="timeStamp" value="7" />
+          <line>231</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/alvaromoran/ConnectionManager.java</url>
-          <line>56</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/alvaromoran/ConnectionManager.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="11" />
+          <url>file://$PROJECT_DIR$/src/com/alvaromoran/ChannelsFactory.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
-        <watch expression="bufferedAnswer.toString();" language="JAVA" />
-        <watch expression="this.connection.getResponseCode()" language="JAVA" />
+        <watch expression="nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_SUBTITLE)" language="JAVA" />
+        <watch expression="nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_TITLE)" language="JAVA" />
+        <watch expression="nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_TITLE)" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

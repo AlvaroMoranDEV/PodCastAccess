@@ -245,7 +245,7 @@ class CastDroidStoreDAOTest {
         List<ChannelInformation> returnedValue = this.castDroidStoreDAO.executeQueryOnDemand();
         if (returnedValue.size() > 0) {
             returnedValue.get(0).setFeedUrl("http://www.ondacero.es/rss/podcast/8502/podcast.xml");
-            this.castDroidStoreDAO.getEnrichedChannelInformation(returnedValue.get(0), false);
+            this.castDroidStoreDAO.getEnrichedChannelInformation(returnedValue.get(0), true);
         }
 
 

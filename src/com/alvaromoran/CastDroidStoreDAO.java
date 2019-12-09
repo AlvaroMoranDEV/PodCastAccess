@@ -228,6 +228,7 @@ public class CastDroidStoreDAO implements PodCastsDAO {
         if (feedUrl != null && isValidUri(feedUrl)) {
             try {
                 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                dbFactory.setNamespaceAware(true); // namespace awareness
                 DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
                 String notParsedMessage = this.connectionManager.performGetRequest(feedUrl);
                 InputSource inputSource = new InputSource(new StringReader(notParsedMessage));
