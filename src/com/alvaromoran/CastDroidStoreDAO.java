@@ -159,9 +159,11 @@ public class CastDroidStoreDAO implements PodCastsDAO {
     public void getEnrichedChannelInformation(ChannelInformation selectedChannel, boolean getEpisodes) {
         if (selectedChannel != null) {
             Document channelAdditionalInfo = executeUriForFeed(selectedChannel.getFeedUrl());
-            ChannelsFactory.enrichChannelFromAuthorsInformation(channelAdditionalInfo, selectedChannel);
-            if (getEpisodes) {
-                selectedChannel.addEpisodes(EpisodesFactory.getParsedListOfEpisodesFromDocument(channelAdditionalInfo));
+            if (channelAdditionalInfo != null) {
+                ChannelsFactory.enrichChannelFromAuthorsInformation(channelAdditionalInfo, selectedChannel);
+                if (getEpisodes) {
+                    selectedChannel.addEpisodes(EpisodesFactory.getParsedListOfEpisodesFromDocument(channelAdditionalInfo));
+                }
             }
         }
     }
