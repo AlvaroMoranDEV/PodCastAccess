@@ -1,5 +1,6 @@
 package com.alvaromoran;
 
+import com.alvaromoran.constants.ChannelAndEpisodesMapArguments;
 import com.alvaromoran.constants.XmlFeedConstants;
 import com.alvaromoran.data.ChannelInformation;
 import com.alvaromoran.data.PodCastChannelDTO;
@@ -8,6 +9,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -60,6 +65,25 @@ class ChannelsFactory {
             channelInformation.setAuthor(getAuthor(channelElement));
             channelInformation.setSummary(getSummary(channelElement));
         }
+    }
+
+    /**
+     * Gets enriched channel information from the Document parsed directly from the channels provider, and returns
+     * this information in a map
+     * @param deserializedMessage XML parsed document from the channels provider
+     * @return map with the enriched information
+     */
+    static Map<Integer, Object> channelInformationFromAuthorsInformation(Document deserializedMessage) {
+        Map<Integer, Object> channelInformation = new HashMap<>();
+        Element channelElement = getChannelElement(deserializedMessage);
+        if (channelElement != null) {
+            channelInformation.put(ChannelAndEpisodesMapArguments.CHANNEL_DESCRIPTION, getDescription(channelElement));
+            channelInformation.put(ChannelAndEpisodesMapArguments.CHANNEL_LINK, getLink(channelElement));
+            channelInformation.put(ChannelAndEpisodesMapArguments.CHANNEL_COPYRIGHT, getCopyright(channelElement));
+            channelInformation.put(ChannelAndEpisodesMapArguments.CHANNEL_AUTHOR, getAuthor(channelElement));
+            channelInformation.put(ChannelAndEpisodesMapArguments.CHANNEL_SUMMARY, getSummary(channelElement));
+        }
+        return channelInformation;
     }
 
     /**

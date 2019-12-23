@@ -1,5 +1,6 @@
 package com.alvaromoran;
 
+import com.alvaromoran.constants.ChannelAndEpisodesMapArguments;
 import com.alvaromoran.constants.GenericITunesConstants;
 import com.alvaromoran.constants.ITunesSearchKeys;
 import com.alvaromoran.constants.ITunesSpecificPodCastKeys;
@@ -166,6 +167,29 @@ public class CastDroidStoreDAO implements PodCastsDAO {
                 }
             }
         }
+    }
+
+    /**
+     * Gets enriched channel information from a URL to be accessed through GET API REST and return relevant
+     * information into an array of objects
+     * @param channelUrl url to be accessed
+     * @param getEpisodes <code>true</code> the channel is filled with episodes information - It may be a time consuming process
+     *                    <code>false</code> then channel is not filled with episodes information
+     * @return list of channel information
+     */
+    public Map<Integer, Object> getEnrichedChannelInformation(String channelUrl, boolean getEpisodes) {
+        Map<Integer, Object> listOfChannelParameters = new HashMap<>();
+        if (channelUrl != null) {
+            Document channelAdditionalInfo = executeUriForFeed(channelUrl);
+            if (channelAdditionalInfo != null) {
+                listOfChannelParameters.putAll(ChannelsFactory.channelInformationFromAuthorsInformation(channelAdditionalInfo));
+                if (getEpisodes) {
+                    listOfChannelParameters.put(ChannelAndEpisodesMapArguments.CHANNEL_EPISODES_LIST,
+                            EpisodesFactory.getParsedListOfEpisodesFromDocument(channelAdditionalInfo));
+                }
+            }
+        }
+        return listOfChannelParameters;
     }
 
     /**

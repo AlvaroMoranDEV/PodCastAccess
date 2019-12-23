@@ -81,11 +81,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.com.alvaromoran in PodCastAccess">
-    <configuration name="All in PodCastAccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.CastDroidStoreDAOTest.getEnrichedChannelInformation_url2_ok">
+    <configuration name="CastDroidStoreDAOTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PodCastAccess" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.alvaromoran.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.alvaromoran" />
+      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
+      <option name="TEST_OBJECT" value="uniqueId" />
+      <uniqueIds>
+        <uniqueId value="[engine:junit-jupiter]/[class:com.alvaromoran.CastDroidStoreDAOTest]" />
+      </uniqueIds>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -105,7 +115,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CastDroidStoreDAOTest.getEnrichedChannelInformationGoodChannel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CastDroidStoreDAOTest.getEnrichedChannelInformation_url2_ok" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PodCastAccess" />
       <extension name="coverage">
         <pattern>
@@ -115,13 +125,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.alvaromoran" />
       <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
-      <option name="METHOD_NAME" value="getEnrichedChannelInformationGoodChannel" />
+      <option name="METHOD_NAME" value="getEnrichedChannelInformation_url2_ok" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CastDroidStoreDAOTest.getEnrichedChannelInformationWeirdUrl_1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CastDroidStoreDAOTest.getEnrichedChannelInformation_urll_ok" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PodCastAccess" />
       <extension name="coverage">
         <pattern>
@@ -131,7 +141,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.alvaromoran" />
       <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
-      <option name="METHOD_NAME" value="getEnrichedChannelInformationWeirdUrl_1" />
+      <option name="METHOD_NAME" value="getEnrichedChannelInformation_urll_ok" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -153,11 +163,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.com.alvaromoran in PodCastAccess" />
-        <item itemvalue="JUnit.CastDroidStoreDAOTest.getEnrichedChannelInformationWeirdUrl_1" />
+        <item itemvalue="JUnit.CastDroidStoreDAOTest.getEnrichedChannelInformation_url2_ok" />
+        <item itemvalue="JUnit.CastDroidStoreDAOTest.getEnrichedChannelInformation_urll_ok" />
+        <item itemvalue="JUnit.CastDroidStoreDAOTest (1)" />
         <item itemvalue="JUnit.CastDroidStoreDAOTest" />
-        <item itemvalue="JUnit.All in PodCastAccess" />
-        <item itemvalue="JUnit.CastDroidStoreDAOTest.getEnrichedChannelInformationGoodChannel" />
+        <item itemvalue="JUnit.com.alvaromoran in PodCastAccess" />
       </list>
     </recent_temporary>
   </component>
@@ -248,6 +258,15 @@
     <state x="981" y="522" key="com.intellij.ide.util.TipDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1575835243187" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/tests/com/alvaromoran/CastDroidStoreDAOTest.java</url>
+          <line>328</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_SUBTITLE)" language="JAVA" />

@@ -6,21 +6,24 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CastDroidStoreDAOTest {
+public class CastDroidStoreDAOTest {
 
     private static String VALID_SEARCH_TERM = "Cultureta";
     private static String GENERIC_SEARCH_TERM_1 = "PodCast";
     private static String GENERIC_SEARCH_TERM_2 = "historia";
     private static String VALID_SEARCH_ARTIST = "Onda Cero";
     private static String VALID_SEARCH_AUTHOR = "OndaCero";
+    private static String CHANNEL_URL_1 = "http://itunes.uned.es/000104/figuras_historia/figuras_historia.xml";
+    private static String CHANNEL_URL_2 = "http://www.ondacero.es/rss/podcast/8502/podcast.xml";
 
     private CastDroidStoreDAO castDroidStoreDAO;
 
     @BeforeEach
-    void initialize() {
+    public void initialize() {
         this.castDroidStoreDAO = new CastDroidStoreDAO();
         this.castDroidStoreDAO.setAutoQueryChannelsOption(true);
     }
@@ -312,5 +315,40 @@ class CastDroidStoreDAOTest {
             List<SingleEpisode> episodes = this.castDroidStoreDAO.getListOfEpisodesFromChannel(returnedValue.get(0));
             assertEquals(0, episodes.size());
         }
+    }
+
+    @Test
+    void getEnrichedChannelInformation_urll_ok() {
+        Map<Integer, Object> information =  this.castDroidStoreDAO.getEnrichedChannelInformation(CHANNEL_URL_1, true);
+        assertNotNull(information);
+        assertNotEquals(0, information.size());
+    }
+
+    @Test
+    void getEnrichedChannelInformation_url2_ok() {
+        Map<Integer, Object> information =  this.castDroidStoreDAO.getEnrichedChannelInformation(CHANNEL_URL_2, true);
+        assertNotNull(information);
+        assertNotEquals(0, information.size());
+    }
+
+    @Test
+    void getEnrichedChannelInformation_url_null() {
+        String url = null;
+        Map<Integer, Object> information =  this.castDroidStoreDAO.getEnrichedChannelInformation(url, true);
+        assertEquals(0, information.size());
+    }
+
+    @Test
+    void getEnrichedChannelInformation_url_empty() {
+        String url = "";
+        Map<Integer, Object> information =  this.castDroidStoreDAO.getEnrichedChannelInformation(url, true);
+        assertEquals(0, information.size());
+    }
+
+    @Test
+    void getEnrichedChannelInformation_url_invalidUrl() {
+        String url = "invalidUrl.invalid";
+        Map<Integer, Object> information =  this.castDroidStoreDAO.getEnrichedChannelInformation(url, true);
+        assertEquals(0, information.size());
     }
 }
