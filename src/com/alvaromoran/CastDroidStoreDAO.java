@@ -177,6 +177,7 @@ public class CastDroidStoreDAO implements PodCastsDAO {
      *                    <code>false</code> then channel is not filled with episodes information
      * @return list of channel information
      */
+    @Override
     public Map<Integer, Object> getEnrichedChannelInformation(String channelUrl, boolean getEpisodes) {
         Map<Integer, Object> listOfChannelParameters = new HashMap<>();
         if (channelUrl != null) {

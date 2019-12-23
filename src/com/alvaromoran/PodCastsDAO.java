@@ -2,8 +2,10 @@ package com.alvaromoran;
 
 import com.alvaromoran.data.ChannelInformation;
 import com.alvaromoran.data.SingleEpisode;
+import org.w3c.dom.Document;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Interface used to access the DAO functionality, which allows to:
@@ -80,6 +82,17 @@ public interface PodCastsDAO {
      * @param selectedChannel channel to be updated with detailed information
      */
     void getEnrichedChannelInformation(ChannelInformation selectedChannel);
+
+    /**
+     * Gets enriched channel information from a particular channel passed as the URL objective to perform the API REST
+     * GET query. THis method will get channel information and put it into a map with information. Indexes of that
+     * information are stored in the class <code>ChannelAndEpisodesMapArugments</code>
+     * @param channelUrl url to perform the query
+     * @param getEpisodes <code>true</code> the channel is filled with episodes information - It may be a time consuming process
+     *                    <code>false</code> then channel is not filled with episodes information
+     * @return map filled with information
+     */
+    Map<Integer, Object> getEnrichedChannelInformation(String channelUrl, boolean getEpisodes);
 
     /**
      * Gets the list of episodes related to a particular channel. No additional information is added to the channel object
