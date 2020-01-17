@@ -5,7 +5,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 /**
  * Class used to manage the connections over the different web information providers, perform
