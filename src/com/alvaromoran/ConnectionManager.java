@@ -1,5 +1,7 @@
 package com.alvaromoran;
 
+import com.alvaromoran.exceptions.PodCastAccessConnectionException;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -29,16 +31,16 @@ class ConnectionManager {
      * @param url url to be accessed
      * @return string returned as an answer
      */
-    public String performGetRequest(String url) {
+    public String performGetRequest(String url) throws PodCastAccessConnectionException {
         // String buffer
-        StringBuffer bufferedAnswer = new StringBuffer();
+        StringBuilder bufferedAnswer = new StringBuilder();
         try {
             // Connection open
             openConnection(url);
             // Check connection correct
             if (this.performingConnection) {
                 // Line buff
-                String readLine = null;
+                String readLine;
                 LOGGER.log(Level.FINE, "Performing HTTP GET REST request over {}", url);
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(this.connection.getInputStream()));
                 while ((readLine = bufferedReader.readLine()) != null) {
@@ -48,7 +50,10 @@ class ConnectionManager {
                 LOGGER.log(Level.WARNING, "Attempting to perform a GET request without specified URL");
             }
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Connection error performing connection over: " + url);
+            // Error management
+            String msg = "Connection error performing connection over: " + url;
+            LOGGER.log(Level.SEVERE, msg);
+            throw new PodCastAccessConnectionException(msg);
         } finally {
             // Close the connection once the operation has ended
             closeConnection();

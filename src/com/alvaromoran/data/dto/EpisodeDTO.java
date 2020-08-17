@@ -1,4 +1,4 @@
-package com.alvaromoran.data;
+package com.alvaromoran.data.dto;
 
 /**
  * Episode information - Only the title and the audio information are mandatory
@@ -6,7 +6,7 @@ package com.alvaromoran.data;
  * @author AlvaroMoranDEV
  * @version 0.1
  */
-public class SingleEpisode {
+public class EpisodeDTO {
 
     /** Episode title */
     private String title;
@@ -36,7 +36,7 @@ public class SingleEpisode {
     private int episode;
 
     /** Episode audio information */
-    private AudioInformation audioInformation;
+    private AudioInformationDTO audioInformationDTO;
 
     /** Episode image reference */
     private String imageUrl;
@@ -44,17 +44,19 @@ public class SingleEpisode {
     /**
      * Constructor of the class with the mandatory fields
      * @param title episode title
-     * @param audioInformation episode audio information
+     * @param audioInformationDTO episode audio information
      */
-    public SingleEpisode(String title, AudioInformation audioInformation) {
+    public EpisodeDTO(String title, AudioInformationDTO audioInformationDTO) {
         this.title = title;
-        this.audioInformation = audioInformation;
+        this.audioInformationDTO = audioInformationDTO;
     }
-
-//region Getters and Setters
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getSubTitle() {
@@ -73,40 +75,36 @@ public class SingleEpisode {
         this.summary = summary;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public AudioInformation getAudioInformation() {
-        return audioInformation;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public String getKeywords() {
-        return keywords;
-    }
-
-    public String getEpisodeDuration() {
-        return episodeDuration;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+    public String getKeywords() {
+        return keywords;
+    }
+
     public void setKeywords(String keywords) {
         this.keywords = keywords;
     }
 
+    public String getEpisodeDuration() {
+        return episodeDuration;
+    }
+
     public void setEpisodeDuration(String episodeDuration) {
         this.episodeDuration = episodeDuration;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public int getSeason() {
@@ -125,6 +123,14 @@ public class SingleEpisode {
         this.episode = episode;
     }
 
+    public AudioInformationDTO getAudioInformationDTO() {
+        return audioInformationDTO;
+    }
+
+    public void setAudioInformationDTO(AudioInformationDTO audioInformationDTO) {
+        this.audioInformationDTO = audioInformationDTO;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -132,5 +138,4 @@ public class SingleEpisode {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-//endregion
 }

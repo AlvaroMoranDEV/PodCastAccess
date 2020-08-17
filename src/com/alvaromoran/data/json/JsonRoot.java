@@ -1,4 +1,4 @@
-package com.alvaromoran.data;
+package com.alvaromoran.data.json;
 
 import java.util.Collection;
 
@@ -10,5 +10,5 @@ import java.util.Collection;
 public class JsonRoot {
 
     public int resultCount;
-    public Collection<PodCastChannelDTO> results;
+    public Collection<PodCastChannel> results;
 }

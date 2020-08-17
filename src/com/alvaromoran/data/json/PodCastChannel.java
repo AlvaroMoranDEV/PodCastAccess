@@ -1,4 +1,4 @@
-package com.alvaromoran.data;
+package com.alvaromoran.data.json;
 
 import java.util.Collection;
 import java.util.Date;
@@ -9,7 +9,7 @@ import java.util.Date;
  * @author AlvaroMoranDEV
  * @version 0.1
  */
-public class PodCastChannelDTO {
+public class PodCastChannel {
 
     public String wrapperType;
     public String kind;

@@ -1,8 +1,8 @@
 package com.alvaromoran;
 
-import com.alvaromoran.data.ChannelInformation;
-import com.alvaromoran.data.SingleEpisode;
-import org.w3c.dom.Document;
+import com.alvaromoran.data.dto.PodCastChannelDTO;
+import com.alvaromoran.exceptions.PodCastAccessConnectionException;
+import com.alvaromoran.exceptions.PodCastAccessUriException;
 
 import java.util.List;
 import java.util.Map;
@@ -23,27 +23,27 @@ public interface PodCastsDAO {
      * @param term term value
      * @return channels returned as result of the query if the auto query option is enabled
      */
-    List<ChannelInformation> updateTermSearchParameter(String term);
+    List<PodCastChannelDTO> updateTermSearchParameter(String term) throws PodCastAccessUriException;
 
     /**
      * Updates the artist term parameter used to search in the ITunes store
      * @param artist artist value
      * @return channels returned as result of the query if the auto query option is enabled
      */
-    List<ChannelInformation>  updateArtistSearchParameter(String artist);
+    List<PodCastChannelDTO>  updateArtistSearchParameter(String artist) throws PodCastAccessUriException;
 
     /**
      * Updates the author term parameter used to search in the ITunes store
      * @param author author value
      * @return channels returned as result of the query if the auto query option is enabled
      */
-    List<ChannelInformation>  updateAuthorSearchParameter(String author);
+    List<PodCastChannelDTO>  updateAuthorSearchParameter(String author) throws PodCastAccessUriException;
 
     /**
      * Sets the limit of channels returned per query. Default value is 50, minimum value is 1 and max value is 200
      * @param number max number of channels returned per query
      */
-    void setChannelResultsLimit(int number);
+    void setChannelResultsLimit(int number) throws PodCastAccessUriException;
 
     /**
      * Sets if the search of channels will be based on paid and free channels (<code>true</code>) or only over free
@@ -64,7 +64,7 @@ public interface PodCastsDAO {
      * Executes the query instantly based on the stored parameters, if any
      * @return list of channels returned as result of the query
      */
-    List<ChannelInformation> executeQueryOnDemand();
+    List<PodCastChannelDTO> executeQueryOnDemand();
 
     /**
      * Gets enriched channel information from a particular channel passed as an argument. This method will add
@@ -73,39 +73,12 @@ public interface PodCastsDAO {
      * @param getEpisodes <code>true</code> the channel is filled with episodes information - It may be a time consuming process
      *                    <code>false</code> then channel is not filled with episodes information
      */
-    void getEnrichedChannelInformation(ChannelInformation selectedChannel, boolean getEpisodes);
-
-    /**
-     * Gets enriched channel information from a particular channel passed as an argument. This method will add
-     * information such as copyright, detailed descriptions, list of episodes... for the ChannelInformation object.
-     * In this case, the channel will be filled with episodes information if possible
-     * @param selectedChannel channel to be updated with detailed information
-     */
-    void getEnrichedChannelInformation(ChannelInformation selectedChannel);
-
-    /**
-     * Gets enriched channel information from a particular channel passed as the URL objective to perform the API REST
-     * GET query. THis method will get channel information and put it into a map with information. Indexes of that
-     * information are stored in the class <code>ChannelAndEpisodesMapArugments</code>
-     * @param channelUrl url to perform the query
-     * @param getEpisodes <code>true</code> the channel is filled with episodes information - It may be a time consuming process
-     *                    <code>false</code> then channel is not filled with episodes information
-     * @return map filled with information
-     */
-    Map<Integer, Object> getEnrichedChannelInformation(String channelUrl, boolean getEpisodes);
+    PodCastChannelDTO getEnrichedChannelInformation(PodCastChannelDTO selectedChannel, boolean getEpisodes) throws PodCastAccessConnectionException;
 
     /**
      * Gets the list of episodes related to a particular channel. No additional information is added to the channel object
      * @param selectedChannel channel to get the episodes from
      * @return list of episodes
      */
-    List<SingleEpisode> getListOfEpisodesFromChannel(ChannelInformation selectedChannel);
-
-    /**
-     * Gets the list of episodes based on a particular URL, if possible
-     * @param url URL to be used to get the episodes information from
-     * @return list of episodes
-     */
-    List<SingleEpisode> getListOfEpisodesFromUrl(String url);
-
+    PodCastChannelDTO getListOfEpisodesFromChannel(PodCastChannelDTO selectedChannel);
 }

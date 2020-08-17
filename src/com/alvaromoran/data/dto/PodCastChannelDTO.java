@@ -1,17 +1,15 @@
-package com.alvaromoran.data;
+package com.alvaromoran.data.dto;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Enriched channel information provided for the particular PodCast channel once the
- * feedURL is provided by the ITunes store. This class contains all episodes of the related
- * PodCast and some detailed channel information
+ * Channel information provided for the particular PodCast channel and ITunes store.
+ * This class contains all episodes of the related PodCast and some detailed channel information
  *
  * @author AlvaroMoranDEV
  * @version 0.1
  */
-public class ChannelInformation {
+public class PodCastChannelDTO {
 
     // BASIC INFORMATION GET FROM THE ITUNES STORE
 
@@ -48,50 +46,30 @@ public class ChannelInformation {
     private String summary;
 
     /** Collection of episodes */
-    private Collection<SingleEpisode> episodes;
+    private Collection<EpisodeDTO> episodes;
 
     /**
-     * Constructor of the class with basic channel information
+     * Constructor of the class with whole channel information
      * @param collection name of the collection
      */
-    public ChannelInformation(String collection) {
+    public PodCastChannelDTO(String collection) {
         this.collection = collection;
-    }
-
-//region Getters and Setters
-
-    public void addSingleEpisode(SingleEpisode episode) {
-        if (this.episodes == null) {
-            this.episodes = new ArrayList<>();
-        }
-        this.episodes.add(episode);
-    }
-
-    public void addSingleCategory(String category) {
-        if (this.categories == null) {
-            this.categories = new ArrayList<>();
-        }
-        this.categories.add(category);
-    }
-
-    public void setCategories(Collection<String> categories) {
-        this.categories = categories;
-    }
-
-    public void addEpisodes(Collection<SingleEpisode> episodes) {
-        this.episodes = episodes;
-    }
-
-    public Collection<String> getCategories() {
-        return this.categories;
-    }
-
-    public Collection<SingleEpisode> getEpisodes() {
-        return this.episodes;
     }
 
     public String getCollection() {
         return collection;
+    }
+
+    public void setCollection(String collection) {
+        this.collection = collection;
+    }
+
+    public Collection<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Collection<String> categories) {
+        this.categories = categories;
     }
 
     public String getImageUrlLow() {
@@ -158,6 +136,11 @@ public class ChannelInformation {
         this.summary = summary;
     }
 
+    public Collection<EpisodeDTO> getEpisodes() {
+        return episodes;
+    }
 
-//endregion
+    public void setEpisodes(Collection<EpisodeDTO> episodes) {
+        this.episodes = episodes;
+    }
 }

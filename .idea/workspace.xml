@@ -5,21 +5,42 @@
       <artifact name="PodCastAccess_v0.1.jar" />
     </artifacts-to-build>
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="43bee492-fc4e-4bb0-81e0-fada83415648" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="PodCastAccess" />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -30,7 +51,6 @@
   <component name="ProjectId" id="1RNxlW9I0WqFQBEyEjt4l6MO0nJ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -43,6 +63,7 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
@@ -62,6 +83,9 @@
       <recent name="com.alvaromoran" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.alvaromoran.data.dto" />
+      <recent name="com.alvaromoran.data.json" />
+      <recent name="com.alvaromoran.factories" />
       <recent name="com.alvaromoran.data" />
       <recent name="com.alvaromoran.data.itunes" />
     </key>
@@ -69,95 +93,73 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="JUnit.CastDroidStoreDAOTest.getEnrichedChannelInformationWeirdUrl_1">
-    <configuration name="CastDroidStoreDAOTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.All in PodCastAccess">
+    <configuration name="All in PodCastAccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PodCastAccess" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.alvaromoran.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.alvaromoran" />
-      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
-      <option name="TEST_OBJECT" value="uniqueId" />
-      <uniqueIds>
-        <uniqueId value="[engine:junit-jupiter]/[class:com.alvaromoran.CastDroidStoreDAOTest]" />
-      </uniqueIds>
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CastDroidStoreDAOTest.executeQueryOnDemandValidQuery" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PodCastsDAOImplTest.executeQueryOnDemandValidQuery" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PodCastAccess" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.alvaromoran.*" />
+          <option name="PATTERN" value="com.alvaromoran.factories.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.alvaromoran" />
-      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
+      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.PodCastsDAOImplTest" />
       <option name="METHOD_NAME" value="executeQueryOnDemandValidQuery" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CastDroidStoreDAOTest.getEnrichedChannelInformationWeirdUrl_1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PodCastsDAOImplTest.getEnrichedChannelInformationWeirdUrl_1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PodCastAccess" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.alvaromoran.*" />
+          <option name="PATTERN" value="com.alvaromoran.factories.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.alvaromoran" />
-      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
+      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.PodCastsDAOImplTest" />
       <option name="METHOD_NAME" value="getEnrichedChannelInformationWeirdUrl_1" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CastDroidStoreDAOTest.getEnrichedChannelInformation_url2_ok" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PodCastsDAOImplTest.getEnrichedChannelInformation_url2_ok" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PodCastAccess" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.alvaromoran.*" />
+          <option name="PATTERN" value="com.alvaromoran.factories.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.alvaromoran" />
-      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
+      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.PodCastsDAOImplTest" />
       <option name="METHOD_NAME" value="getEnrichedChannelInformation_url2_ok" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CastDroidStoreDAOTest.getEnrichedChannelInformation_urll_ok" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PodCastsDAOImplTest.getEnrichedChannelInformation_urll_ok" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PodCastAccess" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.alvaromoran.*" />
+          <option name="PATTERN" value="com.alvaromoran.factories.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.alvaromoran" />
-      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.CastDroidStoreDAOTest" />
+      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.PodCastsDAOImplTest" />
       <option name="METHOD_NAME" value="getEnrichedChannelInformation_urll_ok" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -166,14 +168,15 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CastDroidStoreDAOTest.getEnrichedChannelInformationWeirdUrl_1" />
-        <item itemvalue="JUnit.CastDroidStoreDAOTest.executeQueryOnDemandValidQuery" />
-        <item itemvalue="JUnit.CastDroidStoreDAOTest.getEnrichedChannelInformation_url2_ok" />
-        <item itemvalue="JUnit.CastDroidStoreDAOTest.getEnrichedChannelInformation_urll_ok" />
-        <item itemvalue="JUnit.CastDroidStoreDAOTest (1)" />
+        <item itemvalue="JUnit.All in PodCastAccess" />
+        <item itemvalue="JUnit.PodCastsDAOImplTest.getEnrichedChannelInformationWeirdUrl_1" />
+        <item itemvalue="JUnit.PodCastsDAOImplTest.executeQueryOnDemandValidQuery" />
+        <item itemvalue="JUnit.PodCastsDAOImplTest.getEnrichedChannelInformation_url2_ok" />
+        <item itemvalue="JUnit.PodCastsDAOImplTest.getEnrichedChannelInformation_urll_ok" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="43bee492-fc4e-4bb0-81e0-fada83415648" name="Default Changelist" comment="" />
@@ -195,93 +198,79 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="COLUMN_ORDER" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="COLUMN_WIDTH">
+                <map>
+                  <entry key="2" value="74" />
+                  <entry key="3" value="76" />
+                </map>
+              </option>
             </State>
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="872" y="357" key="#Project_Structure" timestamp="1575835835815">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="92" y="92" width="1182" height="544" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1597684479409">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="872" y="357" key="#Project_Structure/0.0.2560.1400@0.0.2560.1400" timestamp="1575835835815" />
-    <state x="1085" y="383" key="#com.intellij.ide.util.MemberChooser" timestamp="1575897584848">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="92" y="92" width="1182" height="544" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1366.728@0.0.1366.728" timestamp="1597684479409" />
+    <state x="488" y="47" key="#com.intellij.ide.util.MemberChooser" timestamp="1597698378162">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="1085" y="383" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400@0.0.2560.1400" timestamp="1575897584848" />
-    <state width="463" height="466" key="DebuggerActiveHint" timestamp="1575901087940">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="488" y="47" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1597698378162" />
+    <state x="466" y="232" width="548" height="271" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1597686246827">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="463" height="466" key="DebuggerActiveHint/0.0.2560.1400@0.0.2560.1400" timestamp="1575901087940" />
-    <state x="1060" y="453" key="FileChooserDialogImpl" timestamp="1575835889697">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="466" y="232" width="548" height="271" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1597686246827" />
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1597685527173">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="1060" y="453" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1575835889697" />
-    <state width="2539" height="400" key="GridCell.Tab.0.bottom" timestamp="1575901144328">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1597685527173" />
+    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597686258402">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="2539" height="400" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1575901144328" />
-    <state width="2539" height="400" key="GridCell.Tab.0.center" timestamp="1575901144328">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1597686258402" />
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1597702374340">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="2539" height="400" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1575901144328" />
-    <state width="2539" height="400" key="GridCell.Tab.0.left" timestamp="1575901144328">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1597702374340" />
+    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1597702374340">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="2539" height="400" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1575901144328" />
-    <state width="2539" height="400" key="GridCell.Tab.0.right" timestamp="1575901144328">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1597702374340" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1597702374340">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="2539" height="400" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1575901144328" />
-    <state width="2539" height="489" key="GridCell.Tab.1.bottom" timestamp="1575901137698">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1597702374340" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1597702374340">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="2539" height="489" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1575901137698" />
-    <state width="2539" height="489" key="GridCell.Tab.1.center" timestamp="1575901137698">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1597702374340" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1597702062266">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="2539" height="489" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1575901137698" />
-    <state width="2539" height="489" key="GridCell.Tab.1.left" timestamp="1575901137698">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2539" height="489" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1575901137698" />
-    <state width="2539" height="489" key="GridCell.Tab.1.right" timestamp="1575901137698">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="2539" height="489" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1575901137698" />
-    <state x="760" y="273" key="SettingsEditor" timestamp="1575835891628">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="760" y="273" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1575835891628" />
-    <state x="981" y="522" key="com.intellij.ide.util.TipDialog" timestamp="1575835243187">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="981" y="522" key="com.intellij.ide.util.TipDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1575835243187" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1597702062266" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/tests/com/alvaromoran/CastDroidStoreDAOTest.java</url>
+          <url>file://$PROJECT_DIR$/tests/com/alvaromoran/PodCastsDAOImplTest.java</url>
           <line>328</line>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/tests/com/alvaromoran/CastDroidStoreDAOTest.java</url>
-          <line>173</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/alvaromoran/ConnectionManager.java</url>
-          <line>78</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/tests/com/alvaromoran/CastDroidStoreDAOTest.java</url>
-          <line>250</line>
-          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

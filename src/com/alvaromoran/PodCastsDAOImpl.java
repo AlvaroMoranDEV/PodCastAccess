@@ -1,13 +1,15 @@
 package com.alvaromoran;
 
-import com.alvaromoran.constants.ChannelAndEpisodesMapArguments;
 import com.alvaromoran.constants.GenericITunesConstants;
 import com.alvaromoran.constants.ITunesSearchKeys;
 import com.alvaromoran.constants.ITunesSpecificPodCastKeys;
-import com.alvaromoran.data.ChannelInformation;
-import com.alvaromoran.data.SingleEpisode;
-import com.alvaromoran.data.JsonRoot;
-import com.alvaromoran.data.PodCastChannelDTO;
+import com.alvaromoran.data.dto.PodCastChannelDTO;
+import com.alvaromoran.data.json.JsonRoot;
+import com.alvaromoran.data.json.PodCastChannel;
+import com.alvaromoran.exceptions.PodCastAccessConnectionException;
+import com.alvaromoran.exceptions.PodCastAccessUriException;
+import com.alvaromoran.factories.PodCastsFactory;
+import com.alvaromoran.factories.PodCastsFactoryImpl;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.w3c.dom.Document;
@@ -31,10 +33,10 @@ import java.util.logging.Logger;
  * @author AlvaroMoranDEV
  * @version 0.1
  */
-public class CastDroidStoreDAO implements PodCastsDAO {
+public class PodCastsDAOImpl implements PodCastsDAO {
 
     /** Logger of the class */
-    private static final Logger LOGGER = Logger.getLogger(CastDroidStoreDAO.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(PodCastsDAOImpl.class.getName());
 
     /** Maximum number of results when performing a query over ITunes */
     private static final int MAX_RESULTS = 200;
@@ -43,10 +45,10 @@ public class CastDroidStoreDAO implements PodCastsDAO {
     private static final int MIN_RESULTS = 1;
 
     /** Object in charge of managing the connections over the different providers */
-    private ConnectionManager connectionManager;
+    private final ConnectionManager connectionManager;
 
     /** Set of parameters to perform a query over ITunes store*/
-    private HashMap<String, String> queryParametersMap;
+    private final HashMap<String, String> queryParametersMap;
 
     /** Perform the query when a parameter is added or wait to the caller event */
     private boolean autoQueryChannels = false;
@@ -54,13 +56,18 @@ public class CastDroidStoreDAO implements PodCastsDAO {
     /** Gets information of paid and free channels (<code>true</code>) or only for free channels (<code>false</code>)*/
     private boolean searchPaidChannels = false;
 
+    /** Factory to create channels and episodes information */
+    private final PodCastsFactory factory;
+
     /**
      * Constructor of the class that initializes the connection object
      * and the ITunes parameters map
      */
-    public CastDroidStoreDAO() {
+    public PodCastsDAOImpl() {
+        // Generate business objects
         this.connectionManager = new ConnectionManager();
         this.queryParametersMap = new HashMap<>();
+        this.factory = new PodCastsFactoryImpl();
         LOGGER.setLevel(Level.INFO);
     }
 
@@ -72,14 +79,14 @@ public class CastDroidStoreDAO implements PodCastsDAO {
      * @return channels returned as result of the query if the auto query option is enabled
      */
     @Override
-    public List<ChannelInformation> updateTermSearchParameter(String term) {
+    public List<PodCastChannelDTO> updateTermSearchParameter(String term) throws PodCastAccessUriException {
         // Store value
         if (term == null || term.equalsIgnoreCase("")) {
             removeUriParameter(ITunesSearchKeys.TERM.toString());
         } else {
             addUriParameter(ITunesSearchKeys.TERM.toString(), term);
         }
-        return (this.autoQueryChannels? executeUriForITunes() : null);
+        return (this.autoQueryChannels ? executeUriForITunes() : null);
     }
 
     /**
@@ -88,7 +95,7 @@ public class CastDroidStoreDAO implements PodCastsDAO {
      * @return channels returned as result of the query if the auto query option is enabled
      */
     @Override
-    public List<ChannelInformation> updateArtistSearchParameter(String artist) {
+    public List<PodCastChannelDTO> updateArtistSearchParameter(String artist) throws PodCastAccessUriException {
         // Store value
         if (artist == null || artist.equalsIgnoreCase("")) {
             removeUriParameter(ITunesSpecificPodCastKeys.SEARCH_ATTRIBUTE_PODCAST_ARTIST.toString());
@@ -104,7 +111,7 @@ public class CastDroidStoreDAO implements PodCastsDAO {
      * @return channels returned as result of the query if the auto query option is enabled
      */
     @Override
-    public List<ChannelInformation> updateAuthorSearchParameter(String author) {
+    public List<PodCastChannelDTO> updateAuthorSearchParameter(String author) throws PodCastAccessUriException {
         // Store value
         if (author == null || author.equalsIgnoreCase("")) {
             removeUriParameter(ITunesSpecificPodCastKeys.SEARCH_ATTRIBUTE_PODCAST_AUTHOR.toString());
@@ -119,7 +126,7 @@ public class CastDroidStoreDAO implements PodCastsDAO {
      * @param number max number of channels returned per query
      */
     @Override
-    public void setChannelResultsLimit(int number) {
+    public void setChannelResultsLimit(int number) throws PodCastAccessUriException {
         if (number < MAX_RESULTS && number > MIN_RESULTS) {
             addUriParameter(ITunesSearchKeys.LIMIT.toString(), Integer.toString(number));
         } else if (number == 0) {
@@ -145,7 +152,7 @@ public class CastDroidStoreDAO implements PodCastsDAO {
      * @return list of channels returned as result of the query
      */
     @Override
-    public List<ChannelInformation> executeQueryOnDemand() {
+    public List<PodCastChannelDTO> executeQueryOnDemand() throws PodCastAccessUriException  {
         return executeUriForITunes();
     }
 
@@ -157,51 +164,16 @@ public class CastDroidStoreDAO implements PodCastsDAO {
      *                    <code>false</code> then channel is not filled with episodes information
      */
     @Override
-    public void getEnrichedChannelInformation(ChannelInformation selectedChannel, boolean getEpisodes) {
+    public PodCastChannelDTO getEnrichedChannelInformation(PodCastChannelDTO selectedChannel, boolean getEpisodes) throws PodCastAccessConnectionException {
         if (selectedChannel != null) {
             Document channelAdditionalInfo = executeUriForFeed(selectedChannel.getFeedUrl());
-            if (channelAdditionalInfo != null) {
-                ChannelsFactory.enrichChannelFromAuthorsInformation(channelAdditionalInfo, selectedChannel);
-                if (getEpisodes) {
-                    selectedChannel.addEpisodes(EpisodesFactory.getParsedListOfEpisodesFromDocument(channelAdditionalInfo));
-                }
+            if (channelAdditionalInfo != null && !getEpisodes) {
+                this.factory.createChannelExtended(selectedChannel, channelAdditionalInfo);
+            } else if (channelAdditionalInfo != null && getEpisodes) {
+                this.factory.createChannelExtendedAndEpisodes(selectedChannel, channelAdditionalInfo);
             }
         }
-    }
-
-    /**
-     * Gets enriched channel information from a URL to be accessed through GET API REST and return relevant
-     * information into an array of objects
-     * @param channelUrl url to be accessed
-     * @param getEpisodes <code>true</code> the channel is filled with episodes information - It may be a time consuming process
-     *                    <code>false</code> then channel is not filled with episodes information
-     * @return list of channel information
-     */
-    @Override
-    public Map<Integer, Object> getEnrichedChannelInformation(String channelUrl, boolean getEpisodes) {
-        Map<Integer, Object> listOfChannelParameters = new HashMap<>();
-        if (channelUrl != null) {
-            Document channelAdditionalInfo = executeUriForFeed(channelUrl);
-            if (channelAdditionalInfo != null) {
-                listOfChannelParameters.putAll(ChannelsFactory.channelInformationFromAuthorsInformation(channelAdditionalInfo));
-                if (getEpisodes) {
-                    listOfChannelParameters.put(ChannelAndEpisodesMapArguments.CHANNEL_EPISODES_LIST,
-                            EpisodesFactory.getParsedListOfEpisodesFromDocument(channelAdditionalInfo));
-                }
-            }
-        }
-        return listOfChannelParameters;
-    }
-
-    /**
-     * Gets enriched channel information from a particular channel passed as an argument. This method will add
-     * information such as copyright, detailed descriptions, list of episodes... for the ChannelInformation object.
-     * In this case, the channel will be filled with episodes information if possible
-     * @param selectedChannel channel to be updated with detailed information
-     */
-    @Override
-    public void getEnrichedChannelInformation(ChannelInformation selectedChannel) {
-        getEnrichedChannelInformation(selectedChannel, true);
+        return selectedChannel;
     }
 
     /**
@@ -210,28 +182,12 @@ public class CastDroidStoreDAO implements PodCastsDAO {
      * @return list of episodes
      */
     @Override
-    public List<SingleEpisode> getListOfEpisodesFromChannel(ChannelInformation selectedChannel) {
+    public PodCastChannelDTO getListOfEpisodesFromChannel(PodCastChannelDTO selectedChannel) {
         if (selectedChannel != null) {
-            return getListOfEpisodesFromUrl(selectedChannel.getFeedUrl());
-        } else {
-            return new ArrayList<>();
+            Document channelAdditionalInfo = executeUriForFeed(selectedChannel.getFeedUrl());
+            selectedChannel = this.factory.createChannelWithEpisodes(selectedChannel, channelAdditionalInfo);
         }
-    }
-
-    /**
-     * Gets the list of episodes based on a particular URL, if possible
-     * @param url URL to be used to get the episodes information from
-     * @return list of episodes
-     */
-    @Override
-    public List<SingleEpisode> getListOfEpisodesFromUrl(String url) {
-        // Check valid url
-        Document deserializeMessage = executeUriForFeed(url);
-        if (deserializeMessage != null) {
-            return EpisodesFactory.getParsedListOfEpisodesFromDocument(deserializeMessage);
-        } else {
-            return new ArrayList<>();
-        }
+        return selectedChannel;
     }
 
     /**
@@ -251,7 +207,7 @@ public class CastDroidStoreDAO implements PodCastsDAO {
      * @param feedUrl url to connect to
      * @return XML answer
      */
-    private Document executeUriForFeed(String feedUrl) {
+    private Document executeUriForFeed(String feedUrl) throws PodCastAccessConnectionException {
         if (feedUrl != null && isValidUri(feedUrl)) {
             try {
                 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -277,24 +233,26 @@ public class CastDroidStoreDAO implements PodCastsDAO {
      * Executes the GET REST request over the ITunes store
      * @return list of channels returned based on the search terms
      */
-    private List<ChannelInformation> executeUriForITunes() {
-        List<ChannelInformation> returnedChannels = new ArrayList<>();
+    private List<PodCastChannelDTO> executeUriForITunes() throws PodCastAccessConnectionException, PodCastAccessUriException {
+        List<PodCastChannelDTO> returnedChannels = new ArrayList<>();
         String url = createFullQuery();
         if (url != null && isValidUri(url)) {
             // Perform the GET request and parse the answer
-            List<PodCastChannelDTO> roughChannels = parseRoughMessage(this.connectionManager.performGetRequest(url));
+            List<PodCastChannel> roughChannels = parseRoughMessage(this.connectionManager.performGetRequest(url));
             // Parse each one of the DTOs into the channel information final object
-            ChannelsFactory.considerPaidChannels(this.searchPaidChannels);
             if (roughChannels != null && roughChannels.size() > 0) {
                 for (int index = 0; index < roughChannels.size(); index++) {
-                    ChannelInformation parsedChannel = ChannelsFactory.createChannelFromDTO(roughChannels.get(index));
+                    // Create each channel
+                    PodCastChannelDTO parsedChannel =  this.factory.createChannel(roughChannels.get(index), this.searchPaidChannels);
                     if (parsedChannel != null) {
                         returnedChannels.add(parsedChannel);
                     }
                 }
             }
         } else {
-            LOGGER.log(Level.WARNING,"Unable to generate a valid url with the provided parameters");
+            String msg = "Unable to generate a valid url with the provided parameters";
+            LOGGER.log(Level.SEVERE,msg);
+            throw new PodCastAccessUriException(msg);
         }
         return returnedChannels;
     }
@@ -310,8 +268,11 @@ public class CastDroidStoreDAO implements PodCastsDAO {
                 try {
                     this.queryParametersMap.put(key, URLEncoder.encode(value, StandardCharsets.UTF_8.toString()));
                 } catch (UnsupportedEncodingException e) {
-                    LOGGER.log(Level.SEVERE, "UnsupportedEncodingException when adding key to URL - Key: " +
-                            key + ", Encoding: " + StandardCharsets.UTF_8.toString());
+                    // Error processing
+                    String msg = "UnsupportedEncodingException when adding key to URL - Key: " +
+                            key + ", Encoding: " + StandardCharsets.UTF_8.toString();
+                    LOGGER.log(Level.SEVERE, msg);
+                    throw new PodCastAccessUriException(msg);
                 }
             } else {
                 LOGGER.log(Level.WARNING,"Invalid key or value provided");
@@ -367,7 +328,7 @@ public class CastDroidStoreDAO implements PodCastsDAO {
      * @param message full received message
      * @return list or parsed channels
      */
-    private List<PodCastChannelDTO> parseRoughMessage(String message) {
+    private List<PodCastChannel> parseRoughMessage(String message) {
         JsonRoot fullMessageParsed;
         // Gson library to deserialize the JSON message
         Gson jsonDeserializer = new GsonBuilder().create();

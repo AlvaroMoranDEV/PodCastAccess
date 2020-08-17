@@ -1,43 +1,37 @@
-package com.alvaromoran;
+package com.alvaromoran.factories;
 
 import com.alvaromoran.constants.ChannelAndEpisodesMapArguments;
 import com.alvaromoran.constants.XmlFeedConstants;
-import com.alvaromoran.data.ChannelInformation;
-import com.alvaromoran.data.PodCastChannelDTO;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import com.alvaromoran.data.dto.PodCastChannelDTO;
+import com.alvaromoran.data.json.PodCastChannel;
+import com.alvaromoran.exceptions.PodCastAccessParsingException;
+import org.w3c.dom.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Class used to create the ChannelInformation object based on a factory pattern
+ * This class is package protected
  *
  * @author AlvaroMoranDEV
  * @version 0.1
  */
-class ChannelsFactory {
+public class ChannelsFactory {
 
     /** Logger of the class */
     private static final Logger LOGGER = Logger.getLogger(ChannelsFactory.class.getName());
-
-    /** Flag to take into consideration paid channels or not - By default only free channels are allowed */
-    private static boolean createPaidChannels = false;
 
     /**
      * Creates ChannelInformation object based on the PodCastChannelDTO that has been directly parsed from the JSON
      * @param roughChannelInfo rough channel information parsed from the JSON
      * @return well-formed ChannelInformation
      */
-    static ChannelInformation createChannelFromDTO(PodCastChannelDTO roughChannelInfo) {
-        if (isValidRoughInformation(roughChannelInfo)) {
-            ChannelInformation newChannel = new ChannelInformation(roughChannelInfo.collectionName);
+    public static PodCastChannelDTO createChannelFromEntity(PodCastChannel roughChannelInfo, boolean createPaidChannels) {
+        if (isValidRoughInformation(roughChannelInfo, createPaidChannels)) {
+            PodCastChannelDTO newChannel = new PodCastChannelDTO(roughChannelInfo.collectionName);
             // Fill other information
             newChannel.setImageUrlLow(roughChannelInfo.artworkUrl100);
             newChannel.setImageUrlHigh(roughChannelInfo.artworkUrl600);
@@ -54,46 +48,17 @@ class ChannelsFactory {
      * Updates the ChannelInformation object passed as argument, based on the Document parsed directly from the channels
      * provider.
      * @param deserializedMessage XML parsed document from the channels provider
-     * @param channelInformation base channel information to be updated
+     * @param channelInformationDTO base channel information to be updated
      */
-    static void enrichChannelFromAuthorsInformation(Document deserializedMessage, ChannelInformation channelInformation) {
+    public static void enrichChannelFromAuthorsInformation(Document deserializedMessage, PodCastChannelDTO channelInformationDTO) throws PodCastAccessParsingException{
         Element channelElement = getChannelElement(deserializedMessage);
         if (channelElement != null) {
-            channelInformation.setDescription(getDescription(channelElement));
-            channelInformation.setLink(getLink(channelElement));
-            channelInformation.setCopyright(getCopyright(channelElement));
-            channelInformation.setAuthor(getAuthor(channelElement));
-            channelInformation.setSummary(getSummary(channelElement));
+            channelInformationDTO.setDescription(getDescription(channelElement));
+            channelInformationDTO.setLink(getLink(channelElement));
+            channelInformationDTO.setCopyright(getCopyright(channelElement));
+            channelInformationDTO.setAuthor(getAuthor(channelElement));
+            channelInformationDTO.setSummary(getSummary(channelElement));
         }
-    }
-
-    /**
-     * Gets enriched channel information from the Document parsed directly from the channels provider, and returns
-     * this information in a map
-     * @param deserializedMessage XML parsed document from the channels provider
-     * @return map with the enriched information
-     */
-    static Map<Integer, Object> channelInformationFromAuthorsInformation(Document deserializedMessage) {
-        Map<Integer, Object> channelInformation = new HashMap<>();
-        Element channelElement = getChannelElement(deserializedMessage);
-        if (channelElement != null) {
-            channelInformation.put(ChannelAndEpisodesMapArguments.CHANNEL_DESCRIPTION, getDescription(channelElement));
-            channelInformation.put(ChannelAndEpisodesMapArguments.CHANNEL_LINK, getLink(channelElement));
-            channelInformation.put(ChannelAndEpisodesMapArguments.CHANNEL_COPYRIGHT, getCopyright(channelElement));
-            channelInformation.put(ChannelAndEpisodesMapArguments.CHANNEL_AUTHOR, getAuthor(channelElement));
-            channelInformation.put(ChannelAndEpisodesMapArguments.CHANNEL_SUMMARY, getSummary(channelElement));
-        }
-        return channelInformation;
-    }
-
-    /**
-     * CHanges the flag to take into consideration paid channels or not - By default only free channels are allowed
-     * If <code>true</code> paid and free channels will be taken into consideration
-     * If <code>false</code> only free channels will be taken into consideration
-     * @param newValue new value for the flag
-     */
-    static void considerPaidChannels(boolean newValue) {
-        ChannelsFactory.createPaidChannels = newValue;
     }
 
     /**
@@ -102,13 +67,13 @@ class ChannelsFactory {
      * @return <code>true</code> if the JSON information provided is valid
      *         <code>false</code> if the JSON information provided is invalid
      */
-    private static boolean isValidRoughInformation(PodCastChannelDTO roughChannelInfo) {
+    private static boolean isValidRoughInformation(PodCastChannel roughChannelInfo, boolean createPaidChannels) {
         // At least the channel name and the feed URL is needed
         if (roughChannelInfo.collectionName != null && roughChannelInfo.artistName != null && roughChannelInfo.feedUrl != null) {
             // Check if paid channels are taken into consideration or not
-            if (!ChannelsFactory.createPaidChannels && roughChannelInfo.collectionPrice == 0.0) {
+            if (!createPaidChannels && roughChannelInfo.collectionPrice == 0.0) {
                 return true;
-            } else if (!ChannelsFactory.createPaidChannels && roughChannelInfo.collectionPrice != 0.0) {
+            } else if (!createPaidChannels && roughChannelInfo.collectionPrice != 0.0) {
                 LOGGER.log(Level.FINE, "Ignoring channel since its a paid channel and the configuration is only" +
                         "set up for free channels");
                 return false;
@@ -148,12 +113,18 @@ class ChannelsFactory {
      * @param nodeInformation channel node of the XML gathered from the channels provider
      * @return parsed copyright
      */
-    private static String getCopyright(Element nodeInformation) {
+    private static String getCopyright(Element nodeInformation) throws PodCastAccessParsingException{
         String description = null;
-        if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_CHANNEL_COPYRIGHT).item(0) != null) {
-            description = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_CHANNEL_COPYRIGHT).item(0).getTextContent();
-        } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_CHANNEL_COPYRIGHT).item(0) != null) {
-            description = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_CHANNEL_COPYRIGHT).item(0).getTextContent();
+        try {
+            if (nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_CHANNEL_COPYRIGHT).item(0) != null) {
+                description = nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_CHANNEL_COPYRIGHT).item(0).getTextContent();
+            } else if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_CHANNEL_COPYRIGHT).item(0) != null) {
+                description = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_CHANNEL_COPYRIGHT).item(0).getTextContent();
+            }
+        } catch (DOMException e) {
+            String msg = "Error parsing node information";
+            LOGGER.log(Level.SEVERE, msg);
+            throw new PodCastAccessParsingException(msg);
         }
         return description;
     }

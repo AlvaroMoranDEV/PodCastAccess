@@ -1,8 +1,8 @@
-package com.alvaromoran;
+package com.alvaromoran.factories;
 
 import com.alvaromoran.constants.XmlFeedConstants;
-import com.alvaromoran.data.AudioInformation;
-import com.alvaromoran.data.SingleEpisode;
+import com.alvaromoran.data.dto.AudioInformationDTO;
+import com.alvaromoran.data.dto.EpisodeDTO;
 import org.w3c.dom.*;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author AlvaroMoranDEV
  * @version 0.1
  */
-class EpisodesFactory {
+public class EpisodesFactory {
 
     /** Logger of the class */
     private static final Logger LOGGER = Logger.getLogger(EpisodesFactory.class.getName());
@@ -26,9 +26,9 @@ class EpisodesFactory {
      * @param deserializedMessage document that contains the received XML
      * @return list of channel episodes
      */
-    static List<SingleEpisode> getParsedListOfEpisodesFromDocument(Document deserializedMessage) {
+    public static List<EpisodeDTO> getParsedListOfEpisodesFromDocument(Document deserializedMessage) {
         // Look for the items of the deserialized message
-        List<SingleEpisode> parsedEpisodes = new ArrayList<>();
+        List<EpisodeDTO> parsedEpisodes = new ArrayList<>();
         if (deserializedMessage != null) {
             NodeList itemList = deserializedMessage.getElementsByTagName(XmlFeedConstants.XML_ITEM_TAG);
             for (int index = 0; index < itemList.getLength(); index++) {
@@ -36,7 +36,7 @@ class EpisodesFactory {
                 // Once the items are found, the method iterate through them to parse them into SingleEpisode elements
                 if (item.getNodeType() == Node.ELEMENT_NODE) {
                     Element episodeToParse = (Element) item;
-                    SingleEpisode episode = EpisodesFactory.createEpisodeFromElement(episodeToParse);
+                    EpisodeDTO episode = EpisodesFactory.createEpisodeFromElement(episodeToParse);
                     if (episode != null) {
                         parsedEpisodes.add(episode);
                     }
@@ -51,7 +51,7 @@ class EpisodesFactory {
      * @param nodeInformation  item node of the XML
      * @return well-formed SingleEpisode class if possible
      */
-    private static SingleEpisode createEpisodeFromElement(Element nodeInformation) {
+    private static EpisodeDTO createEpisodeFromElement(Element nodeInformation) {
         if (nodeInformation != null) {
             try {
                 // Load information from node
@@ -63,12 +63,12 @@ class EpisodesFactory {
                 String releaseDate = parseReleaseDate(nodeInformation);
                 String keywords = parseKeywords(nodeInformation);
                 String imageUrl = parseImage(nodeInformation);
-                AudioInformation audio = parseAudioInformation(nodeInformation);
+                AudioInformationDTO audio = parseAudioInformation(nodeInformation);
                 int season = parseSeason(nodeInformation);
                 int episodeNumber = parseEpisodeNumber(nodeInformation);
                 // Minimum information loaded -  episode is created
                 if (title != null && audio != null)  {
-                    SingleEpisode episode = new SingleEpisode(title, audio);
+                    EpisodeDTO episode = new EpisodeDTO(title, audio);
                     episode.setSummary(summary);
                     episode.setSubTitle(subtitle);
                     episode.setEpisodeDuration(duration);
@@ -113,7 +113,7 @@ class EpisodesFactory {
      * @param nodeInformation channel node of the XML gathered from the channels provider
      * @return parsed AudioInformation object with the URL of the audio, its format and length
      */
-    private static AudioInformation parseAudioInformation(Element nodeInformation) throws NumberFormatException {
+    private static AudioInformationDTO parseAudioInformation(Element nodeInformation) throws NumberFormatException {
         if (nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_ENCLOSURE).item(0) != null) {
             NamedNodeMap attributes = nodeInformation.getElementsByTagName(XmlFeedConstants.XML_ITEM_ENCLOSURE).item(0).getAttributes();
             if (attributes != null) {
@@ -132,7 +132,7 @@ class EpisodesFactory {
                     type = attributes.getNamedItem(XmlFeedConstants.XML_ENCLOSURE_TYPE).getTextContent();
                 }
                 if ( url != null && url != "" ) {
-                    return new AudioInformation(url, type, length);
+                    return new AudioInformationDTO(url, type, length);
                 } else {
                     LOGGER.log(Level.WARNING, "Received item with null url - Item will be discarded");
                     return null;

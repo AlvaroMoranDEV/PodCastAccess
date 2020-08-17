@@ -1,4 +1,4 @@
-package com.alvaromoran.data;
+package com.alvaromoran.data.dto;
 
 /**
  * Class that stores basic audio information of the PodCast episode
@@ -6,7 +6,7 @@ package com.alvaromoran.data;
  * @author AlvaroMoranDEV
  * @version 0.1
  */
-public class AudioInformation {
+public class AudioInformationDTO {
 
     /** URL where the audio is located */
     private String audioUrl;
@@ -23,7 +23,7 @@ public class AudioInformation {
      * @param audioFormat format of the audio
      * @param audioLength length of the audio
      */
-    public AudioInformation(String audioUrl, String audioFormat, int audioLength) {
+    public AudioInformationDTO(String audioUrl, String audioFormat, int audioLength) {
         this.audioFormat = audioFormat;
         this.audioLength = audioLength;
         this.audioUrl = audioUrl;
