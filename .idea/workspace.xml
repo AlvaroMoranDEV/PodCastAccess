@@ -93,11 +93,26 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in PodCastAccess">
+  <component name="RunManager" selected="JUnit.PodCastsDAOImplTest">
     <configuration name="All in PodCastAccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="PodCastAccess" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PodCastsDAOImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="PodCastAccess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.alvaromoran.podcastaccess.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.alvaromoran.podcastaccess" />
+      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.podcastaccess.PodCastsDAOImplTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -150,29 +165,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PodCastsDAOImplTest.getEnrichedChannelInformation_urll_ok" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PodCastAccess" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.alvaromoran.factories.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.alvaromoran" />
-      <option name="MAIN_CLASS_NAME" value="com.alvaromoran.PodCastsDAOImplTest" />
-      <option name="METHOD_NAME" value="getEnrichedChannelInformation_urll_ok" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PodCastsDAOImplTest" />
         <item itemvalue="JUnit.All in PodCastAccess" />
         <item itemvalue="JUnit.PodCastsDAOImplTest.getEnrichedChannelInformationWeirdUrl_1" />
         <item itemvalue="JUnit.PodCastsDAOImplTest.executeQueryOnDemandValidQuery" />
         <item itemvalue="JUnit.PodCastsDAOImplTest.getEnrichedChannelInformation_url2_ok" />
-        <item itemvalue="JUnit.PodCastsDAOImplTest.getEnrichedChannelInformation_urll_ok" />
       </list>
     </recent_temporary>
   </component>
@@ -243,37 +242,28 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1597686258402" />
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1597702374340">
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1598308157106">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1597702374340" />
-    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1597702374340">
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1598308157106" />
+    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1598308157106">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1597702374340" />
-    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1597702374340">
+    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1598308157106" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1598308157106">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1597702374340" />
-    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1597702374340">
+    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1598308157106" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1598308157106">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1597702374340" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1598308157106" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1597702062266">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1597702062266" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/tests/com/alvaromoran/PodCastsDAOImplTest.java</url>
-          <line>328</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="nodeInformation.getElementsByTagNameNS(XmlFeedConstants.XML_ITUNES_NS, XmlFeedConstants.XML_ITEM_SUBTITLE)" language="JAVA" />
